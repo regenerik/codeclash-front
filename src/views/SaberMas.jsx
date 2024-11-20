@@ -14,7 +14,7 @@ const SaberMas = () => {
           <div className="saber-mas-section">
             <div className="saber-mas-text">
               <p>
-                Nuestro sitio y servidor están diseñados para manejar inteligentemente los reportes obtenidos del campus YPF. Con el objetivo de generar reportes más dinámicos y organizados, esta plataforma permite a los usuarios gestionar y visualizar información clave de manera eficiente.
+                Nuestro sitio y servidor están diseñados para manejar inteligentemente rellenar con texto que tenga que ver con lo que hace la empresa jejejej,. bueno
               </p>
             </div>
             <div className="saber-mas-image">
@@ -24,7 +24,7 @@ const SaberMas = () => {
           <div className="saber-mas-section reverse">
             <div className="saber-mas-text">
               <p>
-                La aplicación fue desarrollada por el equipo de <strong>"Apoyo a la Gestión y explotación de datos"</strong> en el año 2024.
+                La aplicación fue desarrollada por el equipo de <strong>"E3 DIGITAL"</strong> en el año 2024.
               </p>
             </div>
             <div className="saber-mas-image">

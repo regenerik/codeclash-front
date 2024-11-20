@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 console.log("payload preparado: ",payload)
                 try{
-                    let response = await fetch("https://repomatic.onrender.com/update_admin",{
+                    let response = await fetch("https://e3digital.onrender.com/update_admin",{
                         body: JSON.stringify(payload),
                         method: "PUT",
                         headers: {
@@ -51,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return;
                 }
             
-                let response = await fetch("https://repomatic.onrender.com/users", {
+                let response = await fetch("https://e3digital.onrender.com/users", {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }
@@ -72,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             updateReport: async (payload) => {
                 const apiKey = process.env.REACT_APP_API_KEY
                 try {
-                    const response = await fetch('https://repomatic.onrender.com/recuperar_reporte', {
+                    const response = await fetch('https://e3digital.onrender.com/recuperar_reporte', {
                         method: 'POST',
                         body: JSON.stringify(payload),
                         headers: {
@@ -111,7 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             login: async (info) => {
                 try {
-                    let response = await fetch("https://repomatic.onrender.com/login", {
+                    let response = await fetch("https://e3digital.onrender.com/login", {
                         method: 'POST',
                         body: JSON.stringify(info),
                         headers: {
@@ -158,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             register: async (info) => {
                 try {
 
-                    let response = await fetch('https://repomatic.onrender.com/create_user', {
+                    let response = await fetch('https://e3digital.onrender.com/create_user', {
                         method: "POST",
                         body: JSON.stringify(info),
                         headers: {
@@ -195,7 +195,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getReportList: async () => {
                 try {
-                    const result = await fetch('https://repomatic.onrender.com/reportes_disponibles')
+                    const result = await fetch('https://e3digital.onrender.com/reportes_disponibles')
                     const data = await result.json()
                     setStore({ ...getStore(), reportes_disponibles: data.lista_reportes_disponibles, reportes_no_disponibles:data.lista_reportes_no_disponibles })
                 } catch (e) {
@@ -235,7 +235,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             downloadReport: async(url, type) => {
                 const apiKey = process.env.REACT_APP_API_KEY
                 try {
-                    let response = await fetch("https://repomatic.onrender.com/obtener_reporte", {
+                    let response = await fetch("https://e3digital.onrender.com/obtener_reporte", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -271,7 +271,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             uploadFile: async (formData) => {
                 try {
                     // Hacemos el fetch a la URL del backend
-                    let response = await fetch("https://repomatic.onrender.com/create_resumes", {
+                    let response = await fetch("https://e3digital.onrender.com/create_resumes", {
                         method: 'POST',
                         body: formData, // Asegurarse de que el archivo se esté enviando correctamente
                     });
@@ -294,7 +294,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             uploadExcel: async (formData) => {
                 const apiKey = process.env.REACT_APP_API_KEY
                 try {
-                  const response = await fetch('https://repomatic.onrender.com/subir_excel_total', {
+                  const response = await fetch('https://e3digital.onrender.com/subir_excel_total', {
                     method: 'POST',
                     body: formData,
                     headers:{
@@ -336,7 +336,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               deleteExcel: async () => {
                 const apiKey = process.env.REACT_APP_API_KEY
                 try {
-                  const response = await fetch('https://repomatic.onrender.com/eliminar_excel_total', {
+                  const response = await fetch('https://e3digital.onrender.com/eliminar_excel_total', {
                     method: 'DELETE',
                     headers:{
                         "Authorization":apiKey
@@ -352,7 +352,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               existencia: async()=>{
                 const apiKey = process.env.REACT_APP_API_KEY
                 try{
-                    const response = await fetch('https://repomatic.onrender.com/existencia_excel',{
+                    const response = await fetch('https://e3digital.onrender.com/existencia_excel',{
                         headers:{
                             "Authorization":apiKey
                         }
@@ -375,7 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const apiKey = process.env.REACT_APP_API_KEY
                 try {
 
-                  const response = await fetch('https://repomatic.onrender.com/get_one_resume', {
+                  const response = await fetch('https://e3digital.onrender.com/get_one_resume', {
                     method: 'POST',
                     headers: {
                       'Authorization':apiKey,

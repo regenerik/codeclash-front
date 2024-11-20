@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Context } from '../js/store/appContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-import logo from '../img/apoyo_gestion_web.png'
+import logo from '../img/logo.png'
 
 const Navbar = () => {
     const { actions } = useContext(Context);
@@ -25,7 +25,7 @@ const Navbar = () => {
             <div className="container-fluid">
                 <div className='logo_and_title'>
                     <img className="logo" src={logo} alt="logo apoyo a la gestión" />
-                    <Link className={isActive('/')} to="/"><h4 className='title_navbar'>Repomatic</h4></Link>
+                    <Link className={isActive('/')} to="/"><h4 className='title_navbar'>DIGITAL</h4></Link>
                 </div>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,14 +39,21 @@ const Navbar = () => {
                         {
                             token && (
                                 <li className="nav-item">
-                                    <Link className={isActive('/main')} to="/main">Reportes</Link>
+                                    <Link className={isActive('/main')} to="/main">Cartografia</Link>
                                 </li>
                             )
                         }
                         {
                             token && (
                                 <li className="nav-item">
-                                    <Link className={isActive('/experience')} to="/experience">Experiencia</Link>
+                                    <Link className={isActive('/estadistica')} to="/estadistica">Estadística</Link>
+                                </li>
+                            )
+                        }
+                        {
+                            token && (
+                                <li className="nav-item">
+                                    <Link className={isActive('/directorio')} to="/directorio">Directorio</Link>
                                 </li>
                             )
                         }
@@ -60,6 +67,7 @@ const Navbar = () => {
                                 </li>
                             )
                         }
+                                                
                         {token && (
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
