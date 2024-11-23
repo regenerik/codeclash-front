@@ -11,6 +11,39 @@ const getState = ({ getStore, getActions, setStore }) => {
             trigger: false
         },
         actions: {
+            getMapUrl: async (url) => {
+                try {
+                    console.log("url para ser enviada en getMapUrl action: ", url)
+                    const response = await fetch("https://e3digital.onrender.com/get_map_url", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "1803-1989-1803-1989",
+                        },
+                        body: JSON.stringify({ url: url }),
+                    });
+                    console.log("el response en seco: ",response)
+                    // Verificar si la respuesta fue exitosa
+                    if (!response.ok) {
+                        throw new Error(`Error en la solicitud: ${response.status}`);
+                    }
+            
+                    // Parsear el JSON de la respuesta
+                    const data = await response.json();
+                    console.log('Datos del JSON:', data);
+                    // Verificar si el JSON contiene la URL
+                    if (data.url) {
+                        console.log('Datos del JSON:', data.url);
+                        return data.url;
+                    } else {
+                        throw new Error("La URL no vino bien en la respuesta del backend");
+                    }
+                } catch (e) {
+                    console.error('Error en getMapUrl:', e);
+                    return null; // Devolver null explícitamente en caso de error
+                }
+            },            
+            
             toggleAdmin: async (email, admin) => {
                 console.log("entro en toggleadmin")
                 let payload ={

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Context } from '../js/store/appContext'
 import Navbar from '../components/Navbar'
 import './Main.css'
+import MapSelector from '../components/MapSelector.jsx'
 
 const Main = () => {
 
@@ -14,7 +15,10 @@ const Main = () => {
             <Navbar />
             <div className="list-group">
                 {
-                    token ? (<h1>Acá la cartografia</h1>) : (<h3>Logueate para acceder a los reportes</h3>)
+                    token ? (
+                        <MapSelector />
+                ) 
+                    : (<h3>Logueate para acceder a la cartografia</h3>)
                 }
             </div>
         </div>
