@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Context } from '../js/store/appContext.js';
 import hierarchicalData from '../hierarchical_data.json';
+import hierarchical_data_federal from '../hierarchical_data_federal.json';
 
 const MapSelector = () => {
     const { actions } = useContext(Context);
@@ -16,17 +17,35 @@ const MapSelector = () => {
     const [selectedDistrito, setSelectedDistrito] = useState('');
     const [selectedSeccion, setSelectedSeccion] = useState('');
 
-    const entidades = Object.keys(hierarchicalData);
+
+    const entidades =
+        ambito === "fed"
+            ? Object.keys(hierarchical_data_federal)
+            : Object.keys(hierarchicalData);
+
     const distritos =
-        selectedEntidad && hierarchicalData[selectedEntidad]
-            ? Object.keys(hierarchicalData[selectedEntidad])
+        selectedEntidad &&
+            (ambito === "fed"
+                ? hierarchical_data_federal[selectedEntidad]
+                : hierarchicalData[selectedEntidad])
+            ? Object.keys(
+                ambito === "fed"
+                    ? hierarchical_data_federal[selectedEntidad]
+                    : hierarchicalData[selectedEntidad]
+            )
             : [];
+
     const secciones =
         selectedDistrito &&
-        selectedEntidad &&
-        hierarchicalData[selectedEntidad][selectedDistrito]
-            ? hierarchicalData[selectedEntidad][selectedDistrito]
+            selectedEntidad &&
+            (ambito === "fed"
+                ? hierarchical_data_federal[selectedEntidad][selectedDistrito]
+                : hierarchicalData[selectedEntidad][selectedDistrito])
+            ? ambito === "fed"
+                ? hierarchical_data_federal[selectedEntidad][selectedDistrito]
+                : hierarchicalData[selectedEntidad][selectedDistrito]
             : [];
+
 
     const handleAmbitoChange = (e) => {
         setAmbito(e.target.value); // Guardar ambito (loc o fed)
@@ -62,7 +81,7 @@ const MapSelector = () => {
             "BAJA CALIFORNIA": 2,
             "BAJA CALIFORNIA SUR": 3,
             CAMPECHE: 4,
-            COAHUILA: 5,
+            "COAHUILA DE ZARAGOZA": 5,
             COLIMA: 6,
             CHIAPAS: 7,
             CHIHUAHUA: 8,
@@ -73,7 +92,7 @@ const MapSelector = () => {
             HIDALGO: 13,
             JALISCO: 14,
             MEXICO: 15,
-            MICHOACÁN: 16,
+            "MICHOACAN DE OCAMPO": 16,
             MORELOS: 17,
             NAYARIT: 18,
             "NUEVO LEON": 19,
@@ -81,7 +100,7 @@ const MapSelector = () => {
             PUEBLA: 21,
             QUERETARO: 22,
             "QUINTANA ROO": 23,
-            "SAN LUIS POTOSÍ": 24,
+            "SAN LUIS POTOSI": 24,
             SINALOA: 25,
             SONORA: 26,
             TABASCO: 27,
@@ -91,7 +110,7 @@ const MapSelector = () => {
             YUCATAN: 31,
             ZACATECAS: 32,
         };
-    
+
         const entidadNumero = entidadMapping[entidad] || ''; // Convertir el nombre de la entidad a su número
         console.log('Entidad convertida a número:', entidadNumero); // Debugging
 
@@ -99,6 +118,10 @@ const MapSelector = () => {
     };
 
     const handleDownload = async () => {
+        if(!ambito || !entidad || !distrito || !seccion){
+            alert("Te faltan completar datos")
+            return;
+        }
         const url = buildUrl(); // URL inicial
         console.log('URL inicial:', url);
 
