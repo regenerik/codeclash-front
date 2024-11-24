@@ -79,7 +79,7 @@ const MapSelector = () => {
             "NUEVO LEON": 19,
             OAXACA: 20,
             PUEBLA: 21,
-            QUERÉTARO: 22,
+            QUERETARO: 22,
             "QUINTANA ROO": 23,
             "SAN LUIS POTOSÍ": 24,
             SINALOA: 25,
@@ -88,7 +88,7 @@ const MapSelector = () => {
             TAMAULIPAS: 28,
             TLAXCALA: 29,
             VERACRUZ: 30,
-            YUCATÁN: 31,
+            YUCATAN: 31,
             ZACATECAS: 32,
         };
     
