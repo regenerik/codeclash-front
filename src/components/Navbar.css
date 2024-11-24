@@ -23,6 +23,14 @@
   z-index: 1000; /* Aseguráte que quede por encima de otros elementos */
 }
 
+.navbar .nav-link {
+  color: white; /* Cambiá por el color que quieras */
+  text-decoration: none; /* Opcional: quita el subrayado */
+}
+
+.navbar .nav-link:hover {
+  color: #f0e000; /* Cambia a otro color al pasar el mouse */
+}
 
 @media (max-width: 427px) {
   .navbar .logo_and_title {
@@ -33,3 +41,5 @@
     margin-left: auto; /* Empuja el botón hacia la derecha */
   }
 }
+
+
