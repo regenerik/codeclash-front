@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Context } from '../js/store/appContext.js';
 import hierarchicalData from '../hierarchical_data.json';
 import hierarchical_data_federal from '../hierarchical_data_federal.json';
+import './MapSelector.css';
 
 const MapSelector = () => {
     const { actions } = useContext(Context);
@@ -162,28 +163,28 @@ const MapSelector = () => {
     };
 
     return (
-        <div>
+        <div className='caja-total'>
             {/* Selección de ámbito */}
             <div>
                 <h4>Ámbito</h4>
                 <select
                     value={ambito}
                     onChange={handleAmbitoChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose"
+                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
                 >
                     <option value="">Seleccionar Ámbito</option>
                     <option value="fed">Federal</option>
                     <option value="loc">Local</option>
                 </select>
             </div>
-
+            <br />
             {/* Selección de entidad */}
             <div>
                 <h4>Entidad</h4>
                 <select
                     value={selectedEntidad}
                     onChange={handleEntidadChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose"
+                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
                 >
                     <option value="">Seleccionar Entidad</option>
                     {entidades.map((entidad) => (
@@ -193,14 +194,14 @@ const MapSelector = () => {
                     ))}
                 </select>
             </div>
-
+            <br />
             {/* Selección de distrito */}
             <div>
                 <h4>Distrito</h4>
                 <select
                     value={selectedDistrito}
                     onChange={handleDistritoChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose"
+                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
                     disabled={!selectedEntidad}
                 >
                     <option value="">Seleccionar Distrito</option>
@@ -211,14 +212,14 @@ const MapSelector = () => {
                     ))}
                 </select>
             </div>
-
+            <br />
             {/* Selección de sección */}
             <div>
                 <h4>Sección</h4>
                 <select
                     value={selectedSeccion}
                     onChange={handleSeccionChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose"
+                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
                     disabled={!selectedDistrito}
                 >
                     <option value="">Seleccionar Sección</option>
@@ -229,17 +230,17 @@ const MapSelector = () => {
                     ))}
                 </select>
             </div>
-
+            <br />
             {/* Botón para descargar */}
             <button
                 type="button"
                 onClick={handleDownload}
-                className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+                className="text-black bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 inputs"
             >
                 Descargar
             </button>
         </div>
     );
-};
+};  
 
 export default MapSelector;

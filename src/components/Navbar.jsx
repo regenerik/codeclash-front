@@ -21,7 +21,7 @@ const Navbar = () => {
     }
     return (
 
-        <nav className="container-fluid navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="container-fluid navbar navbar-expand-lg bg-body-danger">
             <div className="container-fluid">
                 <div className='logo_and_title'>
                     <img className="logo" src={logo} alt="logo apoyo a la gestión" />

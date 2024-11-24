@@ -1,14 +1,29 @@
-.logo_and_title{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.logo_and_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
+
 .logo {
-    max-width: 15%;
-    height: auto;
-    display: block;
-    margin-right: 3vh;
-  }
-  .title_navbar{
-    font-weight: 900;
-  }
+  max-width: 15%;
+  height: auto;
+  display: block;
+  margin-right: 3vh;
+}
+
+.title_navbar {
+  font-weight: 900;
+}
+
+.navbar {
+  background-color:#3e5764;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra leve */
+  position: sticky; /* Hace que se quede en la parte de arriba al hacer scroll */
+  top: 0; /* Arriba del todo */
+  z-index: 1000; /* Aseguráte que quede por encima de otros elementos */
+}
+
+
+.navbar{
+
+}
