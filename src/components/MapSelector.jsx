@@ -118,8 +118,20 @@ const MapSelector = () => {
     };
 
     const handleDownload = async () => {
-        if(!ambito || !entidad || !distrito || !seccion){
-            alert("Te faltan completar datos")
+        if(!ambito) {
+            alert("Te faltan completar el ámbito")
+            return;
+        }
+        if(!entidad) {
+            alert("Te faltan completar la entidad")
+            return;
+        }
+        if(!distrito){
+            alert("Te faltan completar el distrito")
+            return;
+        }
+        if(!seccion){
+            alert("Te faltan completar la sección")
             return;
         }
         const url = buildUrl(); // URL inicial
