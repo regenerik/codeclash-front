@@ -1,0 +1,18 @@
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    background: linear-gradient(to bottom, rgba(62, 87, 100, 0), rgba(62, 87, 100, 1)); /* Transparencia total arriba */
+    color: white;
+    font-size: 14px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 1000;
+  }
+  
+.footer:hover {
+    color: #f0a500;
+    /* Cambia el color al pasar el mouse */
+    cursor: pointer;
+    /* Agrega un puntero interactivo */
+}

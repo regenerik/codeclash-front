@@ -11,6 +11,7 @@ import Admin from './views/Admin.jsx';
 import Profile from './views/Profile.jsx'
 import Estadistica from './views/Estadistica.jsx';
 import Directorio from './views/Directorio.jsx';
+import Footer from './components/Footer.jsx';
 
 const Layout = () => {
 
@@ -32,6 +33,7 @@ const Layout = () => {
                 <Route exact path="/directorio" element={<Directorio />}/>
                 <Route exact path="/*" element={<NotFound/>}/>
             </Routes>
+            <Footer />
         </BrowserRouter>
     </div>
   )
