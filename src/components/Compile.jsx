@@ -1,23 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../js/store/appContext.js';
 
 const MapSelector = () => {
+
+    const { actions } = useContext(Context)
+
     const [ambito, setAmbito] = useState('');
     const [corte, setCorte] = useState('');
     const [c_mes, setCorteMes] = useState('');
+    const [c_anio, setCorteAnio] = useState('');
     const [entidad, setEntidad] = useState('');
     const [distrito, setDistrito] = useState('');
     const [seccion, setSeccion] = useState('');
 
     const buildUrl = () => {
-        return `https://cartografia.ine.mx/sige8/api/planosMapas?producto=psi&ambito=${ambito}&corte_mes=${c_mes}&corte=${corte}&entidad=${entidad}&distrito=${distrito}&seccion=${seccion}`;
+        return https://cartografia.ine.mx/sige8/api/planosMapas?producto=psi&ambito=${ambito}&corte_mes=${c_mes}&corte=${c_anio}&entidad=${entidad}&distrito=${distrito}&seccion=${seccion};
     };
 
-    const handleDownload = () => {
-        const url = buildUrl();
-        console.log('URL generada:', url);
-        window.open(url, '_blank'); // Abre la URL en una nueva pestaña y dispara la descarga
-    };
+    const handleData = (e) => {
+        let text = e.target.value
+        let arr = text.split(" ")
+        setCorte(text)
+        setCorteMes(arr[0])
+        setCorteAnio(arr[1])
 
+    }
+    const handleDownload = async () => {
+        let url = buildUrl(); // URL inicial
+        console.log('URL inicial:', url);
+    
+        try {
+            // Obtener la URL de descarga desde el action
+            let downloadUrl = await actions.getMapUrl(url);
+    
+            console.log('Descargando desde URL:', downloadUrl);
+    
+            // Extraer el nombre del archivo desde la URL
+            const filename = downloadUrl.split('/').pop(); // Obtiene el último segmento de la URL
+    
+            // Crear un enlace temporal para forzar la descarga
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = filename; // Usar el nombre del archivo dinámicamente
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+    
+            console.log('Descarga iniciada con éxito');
+        } catch (error) {
+            console.error('Error al intentar descargar el archivo:', error);
+            alert('Ocurrió un error al intentar descargar el archivo.');
+        }
+    };
+    
+    
     return (
         <div>
             <div>
@@ -44,7 +80,7 @@ const MapSelector = () => {
                                     <select
                                         className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose"
                                         value={corte}
-                                        onChange={(e) => setCorte(e.target.value)}
+                                        onChange={(e) => handleData(e)}
                                     >
                                         <option value=""> Seleccionar corte </option>
                                         <option value="dic 2022">dic 2022</option>
@@ -298,3 +334,4 @@ const MapSelector = () => {
 };
 
 export default MapSelector;
+

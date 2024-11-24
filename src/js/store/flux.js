@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         actions: {
             getMapUrl: async (url) => {
                 try {
-                    console.log("url para ser enviada en getMapUrl action: ", url)
+                    console.log("url para ser enviada en getMapUrl action: ", url)// http://localhost:5000/
                     const response = await fetch("https://e3digital.onrender.com/get_map_url", {
                         method: "POST",
                         headers: {
