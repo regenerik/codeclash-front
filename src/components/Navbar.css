@@ -24,6 +24,12 @@
 }
 
 
-.navbar{
+@media (max-width: 427px) {
+  .navbar .logo_and_title {
+    flex: 1; /* Ocupa el espacio restante */
+  }
 
+  .navbar-toggler {
+    margin-left: auto; /* Empuja el botón hacia la derecha */
+  }
 }
