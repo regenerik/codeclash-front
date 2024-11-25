@@ -20,7 +20,7 @@ const Estadistica = () => {
           case 'ResumenTotal':
               return <TotalResume />;
           default:
-              return <InstantResume />;
+              return <ResuladosElectorales />;
       }
   };
   const admin = JSON.parse(localStorage.getItem('admin'));
