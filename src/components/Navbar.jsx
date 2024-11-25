@@ -57,9 +57,9 @@ const Navbar = () => {
                                 </li>
                             )
                         }
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className={isActive('/plus')} to="/plus">Saber más</Link>
-                        </li>
+                        </li> */}
                         {
                             !token && (
                                 <li className="nav-item">
