@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import { Context } from '../js/store/appContext'
+import React from 'react'
+// import { Context } from '../js/store/appContext'
 import Navbar from '../components/Navbar'
 import './Main.css'
 import MapSelector from '../components/MapSelector.jsx'
 
 const Main = () => {
 
-    const { actions } = useContext(Context)
+    // const { actions } = useContext(Context)
     const token = localStorage.getItem('token')
 
 

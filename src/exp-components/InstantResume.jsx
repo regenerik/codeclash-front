@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { Context } from '../js/store/appContext.js';
-import uploadImage from '../img/input.png';  // Imagen ejemplo del Excel de entrada
-import downloadImage from '../img/resultado.png';  // Imagen ejemplo del Excel de salida
+import React from 'react';
+// import { Context } from '../js/store/appContext.js';
+// import uploadImage from '../img/input.png';  // Imagen ejemplo del Excel de entrada
+// import downloadImage from '../img/resultado.png';  // Imagen ejemplo del Excel de salida
 import './InstantResume.css';  // El archivo CSS donde irán los estilos
 
 const InstantResume = () => {
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
 
 
 

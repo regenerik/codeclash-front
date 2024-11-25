@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Estadistica.css';
 import Navbar from '../components/Navbar.jsx'
-import GetOneResume from '../exp-components/GetOneResume.jsx'
+import ResuladosElectorales from '../exp-components/ResultadosElectorales.jsx'
 import InstantResume from '../exp-components/InstantResume.jsx'
 import TotalRanking from '../exp-components/TotalRanking.jsx'
 import TotalResume from '../exp-components/TotalResume.jsx'
@@ -11,8 +11,8 @@ const Estadistica = () => {
 
   const renderTabContent = () => {
       switch (activeTab) {
-          case 'ObtenerUnResumen':
-              return <GetOneResume />;
+          case 'ResuladosElectorales':
+              return <ResuladosElectorales />;
           case 'ResumenesInstantaneos':
               return <InstantResume />;
           case 'RankingTotal':
@@ -34,10 +34,10 @@ const Estadistica = () => {
                       <div className="admin-container">
                           <div className="admin-tabs">
                               <button
-                                  className={`tab-button ${activeTab === 'ObtenerUnResumen' ? 'active' : ''}`}
-                                  onClick={() => setActiveTab('ObtenerUnResumen')}
+                                  className={`tab-button ${activeTab === 'ResuladosElectorales' ? 'active' : ''}`}
+                                  onClick={() => setActiveTab('ResuladosElectorales')}
                               >
-                                  Opcion 1
+                                  Resultados Electorales
                               </button>
                               <button
                                   className={`tab-button ${activeTab === 'ResumenesInstantaneos' ? 'active' : ''}`}

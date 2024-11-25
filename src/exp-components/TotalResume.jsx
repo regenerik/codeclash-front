@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Context } from '../js/store/appContext.js';
-import uploadImage from '../img/input.png';  // Imagen ejemplo del Excel de entrada
+import React from 'react';
+// import { Context } from '../js/store/appContext.js';
+// import uploadImage from '../img/input.png';  // Imagen ejemplo del Excel de entrada
 import './TotalResume.css';  // El archivo CSS donde irán los estilos
 
 const TotalResume = () => {
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
 
   return (
     <div className='instant-resume-wrapper'>
