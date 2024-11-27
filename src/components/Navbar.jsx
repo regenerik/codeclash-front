@@ -25,7 +25,7 @@ const Navbar = () => {
             <div className="container-fluid">
                 <div className='logo_and_title'>
                     <img className="logo" src={logo} alt="logo apoyo a la gestión" />
-                    <Link className={isActive('/')} to="/"><h4 className='title_navbar'>DIGITAL</h4></Link>
+                    <h4 className='title_navbar'>DIGITAL</h4>
                 </div>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,9 +33,14 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className={isActive('/')} to="/">Principal</Link>
-                        </li>
+                       {
+                            token &&(
+                                <li className="nav-item">
+                                    <Link className={isActive('/')} to="/">Principal</Link>
+                                </li>
+                            )
+                        
+                       } 
                         {
                             token && (
                                 <li className="nav-item">
@@ -60,18 +65,18 @@ const Navbar = () => {
                         {/* <li className="nav-item">
                             <Link className={isActive('/plus')} to="/plus">Saber más</Link>
                         </li> */}
-                        {
+                        {/* {
                             !token && (
                                 <li className="nav-item">
                                     <Link className={isActive('/loginregister')} to="/loginregister">Registrate</Link>
                                 </li>
                             )
-                        }
+                        } */}
                                                 
                         {token && (
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {name}
+                                    Perfil
                                 </div>
 
                                 <ul className="dropdown-menu">

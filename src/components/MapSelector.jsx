@@ -163,9 +163,10 @@ const MapSelector = () => {
     };
 
     return (
-        <div className='caja-total'>
+        <div className='admin-container'>
+            
             {/* Selección de ámbito */}
-            <div>
+            <div className='home-content d-flex flex-column'>
                 <h4>Ámbito</h4>
                 <select
                     value={ambito}
@@ -178,8 +179,9 @@ const MapSelector = () => {
                 </select>
             </div>
             <br />
+           
             {/* Selección de entidad */}
-            <div>
+            <div className='home-content d-flex flex-column'>
                 <h4>Entidad</h4>
                 <select
                     value={selectedEntidad}
@@ -196,7 +198,7 @@ const MapSelector = () => {
             </div>
             <br />
             {/* Selección de distrito */}
-            <div>
+            <div className='home-content d-flex flex-column'>
                 <h4>Distrito</h4>
                 <select
                     value={selectedDistrito}
@@ -214,7 +216,7 @@ const MapSelector = () => {
             </div>
             <br />
             {/* Selección de sección */}
-            <div>
+            <div className='home-content d-flex flex-column'>
                 <h4>Sección</h4>
                 <select
                     value={selectedSeccion}
