@@ -43,6 +43,7 @@
 
   .navbar-toggler {
     margin-left: auto; /* Empuja el botón hacia la derecha */
+    color: whitesmoke;
   }
 }
 

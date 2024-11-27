@@ -113,9 +113,9 @@ const Login = () => {
             <input type='checkbox'
               checked={rememberMe}
               onChange={handleRememberMeChange} />
-            Recordame
+            Recordame en este dispositivo
           </label>
-          <p>Olvidaste tu contraseña?</p>
+          {/* <p>Olvidaste tu contraseña?</p> */}
         </div>
         <button type='submit'>{isLoading ? (
           <img
@@ -125,9 +125,9 @@ const Login = () => {
           />
         ) : (<h5>Login</h5>)}</button>
 
-        <div className='register-link'>
+        {/* <div className='register-link'>
           <p>No tienes cuenta? <span onClick={() => navigate('/loginregister')} style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}>Registrate acá</span></p>
-        </div>
+        </div> */}
       </form>
     </div>
   );
