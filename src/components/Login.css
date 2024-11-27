@@ -5,7 +5,7 @@
     margin-top: 3vh;
     max-width: 500px; /* Ajusta el tamaño máximo según sea necesario */
     background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid black(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     color: #fff;
     border-radius: 10px;
@@ -17,6 +17,7 @@
 .wrapper h1 {
     font-size: 32px;
     text-align: center;
+    color: #333;
 }
 
 .wrapper .input-box {
@@ -30,7 +31,7 @@
     width: 100%;
     height: 100%;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid black(255, 255, 255, .2);
     outline: none;
     border-radius: 40px;
     font-size: 16px;
@@ -39,7 +40,7 @@
 }
 
 .input-box input::placeholder {
-    color: #fff;
+    color: black;
 }
 
 .input-box .icon {
@@ -48,6 +49,7 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 16px;
+    color: black;
 }
 
 .wrapper .remember-forgot {
@@ -55,6 +57,7 @@
     justify-content: space-between;
     font-size: 14.5px;
     margin: -15px 0 15px;
+    color: #333;
 }
 
 .remember-forgot label input {
