@@ -32,11 +32,11 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav nav-underline nav-tabs">
                        {
                             token &&(
                                 <li className="nav-item">
-                                    <Link className={isActive('/')} to="/">Principal</Link>
+                                    <Link className={isActive('/')} to="/">Inicio</Link>
                                 </li>
                             )
                         
@@ -79,7 +79,7 @@ const Navbar = () => {
                                     Perfil
                                 </div>
 
-                                <ul className="dropdown-menu">
+                                <ul className="dropdown-menu ">
                                     {
                                         admin && <li><div className="dropdown-item" onClick={() => navigate("/admin")} >Admin</div></li>
                                     }

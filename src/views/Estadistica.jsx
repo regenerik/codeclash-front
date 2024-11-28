@@ -58,7 +58,7 @@ const Estadistica = () => {
                                   Opcion 4
                               </button>
                           </div>
-                          <div className="admin-content">
+                          <div className="admin-content bg-dark-subtle">
                               {renderTabContent()}
                           </div>
                       </div>
