@@ -31,7 +31,7 @@
 .navbar .nav-link:hover {
   color: #ccf456; /* Cambia a otro color al pasar el mouse */
   font-weight: bolder;
-  font-size: larger
+
   
   ;
 }
@@ -43,7 +43,7 @@
 
   .navbar-toggler {
     margin-left: auto; /* Empuja el botón hacia la derecha */
-    color: whitesmoke;
+    color: w#ccf456;
   }
 }
 

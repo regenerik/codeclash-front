@@ -3,6 +3,7 @@ import { Context } from '../js/store/appContext.js';
 import hierarchicalData from '../hierarchical_data.json';
 import hierarchical_data_federal from '../hierarchical_data_federal.json';
 import './MapSelector.css';
+import { MdWidthNormal } from 'react-icons/md';
 
 const MapSelector = () => {
     const { actions } = useContext(Context);
@@ -163,10 +164,10 @@ const MapSelector = () => {
     };
 
     return (
-        <div className='admin-container'>
+        <div className='mb-3 position-absolute top-50 start-50 translate-middle'>
             
             {/* Selección de ámbito */}
-            <div className='home-content d-flex flex-column'>
+            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
                 <h4>Ámbito</h4>
                 <select
                     value={ambito}
@@ -181,7 +182,7 @@ const MapSelector = () => {
             <br />
            
             {/* Selección de entidad */}
-            <div className='home-content d-flex flex-column'>
+            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
                 <h4>Entidad</h4>
                 <select
                     value={selectedEntidad}
@@ -198,7 +199,7 @@ const MapSelector = () => {
             </div>
             <br />
             {/* Selección de distrito */}
-            <div className='home-content d-flex flex-column'>
+            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
                 <h4>Distrito</h4>
                 <select
                     value={selectedDistrito}
@@ -216,7 +217,7 @@ const MapSelector = () => {
             </div>
             <br />
             {/* Selección de sección */}
-            <div className='home-content d-flex flex-column'>
+            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
                 <h4>Sección</h4>
                 <select
                     value={selectedSeccion}
@@ -237,7 +238,7 @@ const MapSelector = () => {
             <button
                 type="button"
                 onClick={handleDownload}
-                className="text-black bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 inputs"
+                className="text-black bg-warnin-800 hover:bg-succes-900 focus:outline-none focus:ring-4 focus:ring-succes-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 inputs position-absolute top-100 start-50 translate-middle btn btn-warning"
             >
                 Descargar
             </button>
