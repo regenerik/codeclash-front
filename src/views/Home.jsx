@@ -23,7 +23,7 @@ const Home = () => {
                         <div className='home-content d-flex flex-column bg-dark-subtle'>
                            <button class="btn btn-dark new-button" onClick={()=>navigate("./estadistica")}>Estadística</button>
                            <button class="btn btn-dark new-button" onClick={()=>navigate("./main")}>Cartografia</button>
-                           <button class="btn btn-dark new-button" onClick={()=>navigate("./directorio")}>Directorio</button>
+                           <button class="btn btn-dark new-button" onClick={()=>navigate("./utilidades")}>Utilidades</button>
                         </div>
                     </div>
                 </>
