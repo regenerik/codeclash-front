@@ -108,7 +108,7 @@ const MapSelector = () => {
             TABASCO: 27,
             TAMAULIPAS: 28,
             TLAXCALA: 29,
-            "VERACRUZ  DE IGNACIO DE LA LLAVE": 30,
+            VERACRUZ: 30,
             YUCATAN: 31,
             ZACATECAS: 32,
         };
