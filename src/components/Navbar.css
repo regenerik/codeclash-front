@@ -36,6 +36,24 @@
   ;
 }
 
+.perfil {
+  color: #fff; /* Estilo inicial */
+  background-color: transparent;
+  transition: all 0.3s ease; /* Para un efecto suave */
+}
+
+.perfil:focus,
+.perfil:active,
+.dropdown.show .perfil {
+  color: white; /* Mantiene el texto blanco */
+  background-color: #333; /* Fondo oscuro */
+  outline: none;
+}
+
+.perfil:hover {
+  color: white;
+  background-color: #444; /* Fondo un poco más claro */
+}
 @media (max-width: 427px) {
   .navbar .logo_and_title {
     flex: 1; /* Ocupa el espacio restante */

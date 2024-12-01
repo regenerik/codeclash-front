@@ -33,20 +33,13 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav nav-underline nav-tabs">
-                       {
-                            token &&(
+                        {
+                            token && (
                                 <li className="nav-item">
                                     <Link className={isActive('/')} to="/">Inicio</Link>
                                 </li>
                             )
-                        
-                       } 
-                        {
-                            token && (
-                                <li className="nav-item">
-                                    <Link className={isActive('/main')} to="/main">Cartografia</Link>
-                                </li>
-                            )
+
                         }
                         {
                             token && (
@@ -55,6 +48,14 @@ const Navbar = () => {
                                 </li>
                             )
                         }
+                        {
+                            token && (
+                                <li className="nav-item">
+                                    <Link className={isActive('/main')} to="/main">Cartografia</Link>
+                                </li>
+                            )
+                        }
+
                         {
                             token && (
                                 <li className="nav-item">
@@ -72,10 +73,10 @@ const Navbar = () => {
                                 </li>
                             )
                         } */}
-                                                
+
                         {token && (
                             <li className="nav-item dropdown">
-                                <div className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div className="nav-link dropdown-toggle perfil" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Perfil
                                 </div>
 
