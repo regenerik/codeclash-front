@@ -9,7 +9,7 @@ const Navbar = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
-    const name = localStorage.getItem('name')
+    // const name = localStorage.getItem('name')
     const admin = JSON.parse(localStorage.getItem('admin'));
     const isActive = (path) => location.pathname === path ? 'nav-link active' : 'nav-link';
 
@@ -58,7 +58,7 @@ const Navbar = () => {
                         {
                             token && (
                                 <li className="nav-item">
-                                    <Link className={isActive('/directorio')} to="/directorio">Directorio</Link>
+                                    <Link className={isActive('/utilidades')} to="/utilidades">Utilidades</Link>
                                 </li>
                             )
                         }

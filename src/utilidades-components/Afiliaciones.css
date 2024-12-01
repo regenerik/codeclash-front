@@ -1,0 +1,53 @@
+.caja-input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.adjust{
+    height: auto;
+    margin-right: 1vh;
+
+}
+
+.caja-input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2vh;
+}
+
+.input{
+    border-radius: 1vh;
+    border: 0;
+    padding: 1vh;
+}
+
+.afiliaciones-total{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.title{
+    margin-bottom: 3vh;
+}
+
+.inputs-box{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.boton-consulta{
+    border-radius: 1vh;
+    border: 0;
+    padding: 1vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    margin-top: 3vh;
+}

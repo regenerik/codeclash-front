@@ -12,6 +12,25 @@ const getState = ({ getStore, getActions, setStore }) => {
             dataEstadisticas: {}
         },
         actions: {
+            getAfiliacion: async (payload) => {
+                let token = localStorage.getItem('token');
+                try{
+                    const response = await fetch('https://e3digital.onrender.com/consulta-afiliado', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                            },
+                        body: JSON.stringify(payload)
+                    })
+                    const data = await response.json();
+                    console.log("esta es la data entrante: ",data)
+                    if(!data.msg) throw new Error('algo salio mal en la solicitud')
+                    alert(data.msg)
+                }catch(e){
+                    console.error(e)
+                }
+            },
             getStadistics: async (payload) => {
                 try {
                     const controller = new AbortController();

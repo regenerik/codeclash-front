@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import './Estadistica.css';
+import './Utilidades.css';
 import Navbar from '../components/Navbar.jsx'
-import InstantResume from '../exp-components/InstantResume.jsx'
-import TotalRanking from '../exp-components/TotalRanking.jsx'
-import TotalResume from '../exp-components/TotalResume.jsx'
+import Utilidad2 from '../utilidades-components/Utilidad2.jsx';
 import Afiliaciones from '../utilidades-components/Afiliaciones.jsx';
 
 const Utilidades = () => {
@@ -14,22 +12,17 @@ const Utilidades = () => {
           case 'Afiliaciones':
               return <Afiliaciones />;
           case 'ResumenesInstantaneos':
-              return <InstantResume />;
-          case 'RankingTotal':
-              return <TotalRanking />;
-          case 'ResumenTotal':
-              return <TotalResume />;
+              return <Utilidad2 />;
           default:
               return <Afiliaciones />;
       }
   };
-  const admin = JSON.parse(localStorage.getItem('admin'));
   const token = localStorage.getItem('token')
   return (
       <div>
           <Navbar />
           {
-              admin === true && token ? (
+            token ? (
                   <div>
                       <div className="admin-container">
                           <div className="admin-tabs">
@@ -45,25 +38,13 @@ const Utilidades = () => {
                               >
                                   Opcion 2
                               </button>
-                              <button
-                                  className={`tab-button ${activeTab === 'RankingTotal' ? 'active' : ''}`}
-                                  onClick={() => setActiveTab('RankingTotal')}
-                              >
-                                  Opcion 3
-                              </button>
-                              <button
-                                  className={`tab-button ${activeTab === 'ResumenTotal' ? 'active' : ''}`}
-                                  onClick={() => setActiveTab('ResumenTotal')}
-                              >
-                                  Opcion 4
-                              </button>
                           </div>
                           <div className="admin-content bg-dark-subtle">
                               {renderTabContent()}
                           </div>
                       </div>
                   </div>
-              ) : (<h2>Logueate con una cuenta administradora para ver este contenido</h2>)
+              ) : (<h2>Logueate para ver este contenido</h2>)
           }
       </div>
   )
