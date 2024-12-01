@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../js/store/appContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-import logo from '../img/logo.png'
+import logo2 from '../img/logo2_individual.png'
 
 const Navbar = () => {
     const { actions } = useContext(Context);
+    const [ contador , setContador ] = useState(0)
     const location = useLocation();
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
@@ -17,15 +18,22 @@ const Navbar = () => {
     const handlerLogOut = () => {
         actions.logout()
         navigate('/')
+    }
 
+    const handleShowRegister = () =>{
+        if(contador > 10){
+            navigate('/loginregister')
+        }else{
+            setContador(prev => prev + 1)
+        }
     }
     return (
 
         <nav className="container-fluid navbar navbar-expand-lg bg-body-danger">
             <div className="container-fluid">
                 <div className='logo_and_title'>
-                    <img className="logo" src={logo} alt="logo apoyo a la gestión" />
-                    <h4 className='title_navbar'>DIGITAL</h4>
+                    <img className="logo" src={logo2} alt="logo apoyo a la gestión" onClick={handleShowRegister} />
+                    <h4 className='title_navbar'>Digital</h4>
                 </div>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

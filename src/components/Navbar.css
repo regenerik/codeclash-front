@@ -8,11 +8,13 @@
   max-width: 15%;
   height: auto;
   display: block;
-  margin-right: 3vh;
+  margin-right: 1vh;
 }
 
 .title_navbar {
   color: white;font-weight: 900;
+  font-size: medium;
+  margin: 0;
 }
 
 .navbar {
