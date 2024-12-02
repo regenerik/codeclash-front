@@ -3,6 +3,7 @@ import './Utilidades.css';
 import Navbar from '../components/Navbar.jsx'
 import Utilidad2 from '../utilidades-components/Utilidad2.jsx';
 import Afiliaciones from '../utilidades-components/Afiliaciones.jsx';
+import RedirectToHome from '../components/RedirectHome.jsx';
 
 const Utilidades = () => {
   const [activeTab, setActiveTab] = useState('usuarios');
@@ -44,7 +45,9 @@ const Utilidades = () => {
                           </div>
                       </div>
                   </div>
-              ) : (<h2>Logueate para ver este contenido</h2>)
+              ) : (
+                <RedirectToHome/>
+            )
           }
       </div>
   )

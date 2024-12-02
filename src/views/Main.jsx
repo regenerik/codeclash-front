@@ -3,6 +3,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import './Main.css'
 import MapSelector from '../components/MapSelector.jsx'
+import RedirectToHome from '../components/RedirectHome.jsx'
 
 const Main = () => {
 
@@ -18,7 +19,9 @@ const Main = () => {
                     token ? (
                         <MapSelector />
                 ) 
-                    : (<h3>Logueate para acceder a la cartografia</h3>)
+                    : (
+                        <RedirectToHome/>
+                    )
                 }
             </div>
         </div>
