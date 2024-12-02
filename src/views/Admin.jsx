@@ -5,6 +5,7 @@ import Usuarios from '../adm-components/Usuarios.jsx';
 import Reportes from '../adm-components/Reportes.jsx';
 import Errores from '../adm-components/Errores.jsx';
 import Servidor from '../adm-components/Servidor.jsx';
+import RedirectToHome from '../components/RedirectHome.jsx';
 
 const Admin = () => {
     const [activeTab, setActiveTab] = useState('usuarios');
@@ -63,7 +64,9 @@ const Admin = () => {
                             </div>
                         </div>
                     </div>
-                ) : (<h2>Logueate con una cuenta administradora para ver este contenido</h2>)
+                ) : (
+                <RedirectToHome />
+            )
             }
         </div>
     )

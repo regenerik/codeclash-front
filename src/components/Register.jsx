@@ -71,23 +71,23 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <h1>Regístrate</h1>
         <div className="input-box">
-          <input type="text" placeholder='DNI' name='dni' value={formDataRegister.dni} onChange={handleChange} required />
+          <input type="text" placeholder='DNI' autocomplete="off" name='dni' value={formDataRegister.dni} onChange={handleChange} required />
           <HiMiniIdentification className='icon' />
         </div>
         <div className="input-box">
-          <input type="text" placeholder='Nombre' name='name' value={formDataRegister.name} onChange={handleChange} required />
+          <input type="text" placeholder='Nombre' autoComplete='name' name='name' value={formDataRegister.name} onChange={handleChange} required />
           <FaUser className='icon' />
         </div>
         <div className="input-box">
-          <input type="email" placeholder='Email' name='email' value={formDataRegister.email} onChange={handleChange} required />
+          <input type="email" placeholder='Email' autoComplete='email' name='email' value={formDataRegister.email} onChange={handleChange} required />
           <MdEmail className='icon' />
         </div>
         <div className="input-box">
-          <input type="password" placeholder='Contraseña' name='password' value={formDataRegister.password} onChange={handleChange2} required />
+          <input type="password" placeholder='Contraseña' autoComplete='new-password' name='password' value={formDataRegister.password} onChange={handleChange2} required />
           <FaLock className='icon' />
         </div>
         <div className="input-box">
-          <input type="password" placeholder='Repetir Contraseña' name='passwordCheck' value={passwordCheck} onChange={(e) => setPasswordCheck(e.target.value)} required />
+          <input type="password" placeholder='Repetir Contraseña' autoComplete='new-password' name='passwordCheck' value={passwordCheck} onChange={(e) => setPasswordCheck(e.target.value)} required />
           <FaLock className='icon' />
         </div>
         {

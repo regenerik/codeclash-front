@@ -89,6 +89,7 @@ const Login = () => {
             placeholder='E-mail'
             id='email'
             value={email}
+            autoComplete='email'
             onChange={(e) => handlerSetEmail(e.target.value)}
             required
           />
@@ -100,6 +101,7 @@ const Login = () => {
             placeholder='Contraseña'
             id='password'
             value={pass}
+            autoComplete='current-password'
             onChange={(e) => handlerSetPass(e.target.value)}
             required
           />
@@ -111,6 +113,7 @@ const Login = () => {
         <div className='remember-forgot'>
           <label>
             <input type='checkbox'
+              name='rememberMe'
               checked={rememberMe}
               onChange={handleRememberMeChange} />
             Recordame en este dispositivo

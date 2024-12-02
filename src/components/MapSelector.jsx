@@ -3,7 +3,8 @@ import { Context } from '../js/store/appContext.js';
 import hierarchicalData from '../hierarchical_data.json';
 import hierarchical_data_federal from '../hierarchical_data_federal.json';
 import './MapSelector.css';
-import { MdWidthNormal } from 'react-icons/md';
+// import { MdWidthNormal } from 'react-icons/md';
+import RedirectToHome from './RedirectHome.jsx';
 
 const MapSelector = () => {
     const { actions } = useContext(Context);
@@ -120,19 +121,19 @@ const MapSelector = () => {
     };
 
     const handleDownload = async () => {
-        if(!ambito) {
+        if (!ambito) {
             alert("Te faltan completar el ámbito")
             return;
         }
-        if(!entidad) {
+        if (!entidad) {
             alert("Te faltan completar la entidad")
             return;
         }
-        if(!distrito){
+        if (!distrito) {
             alert("Te faltan completar el distrito")
             return;
         }
-        if(!seccion){
+        if (!seccion) {
             alert("Te faltan completar la sección")
             return;
         }
@@ -163,87 +164,103 @@ const MapSelector = () => {
         }
     };
 
+    const token = localStorage.getItem('token');
+
     return (
-        <div className='mb-3 position-absolute top-50 start-50 translate-middle'>
-            
-            {/* Selección de ámbito */}
-            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
-                <h4>Ámbito</h4>
-                <select
-                    value={ambito}
-                    onChange={handleAmbitoChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
-                >
-                    <option value="">Seleccionar Ámbito</option>
-                    <option value="fed">Federal</option>
-                    <option value="loc">Local</option>
-                </select>
-            </div>
-            <br />
-           
-            {/* Selección de entidad */}
-            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
-                <h4>Entidad</h4>
-                <select
-                    value={selectedEntidad}
-                    onChange={handleEntidadChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
-                >
-                    <option value="">Seleccionar Entidad</option>
-                    {entidades.map((entidad) => (
-                        <option key={entidad} value={entidad}>
-                            {entidad}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <br />
-            {/* Selección de distrito */}
-            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
-                <h4>Distrito</h4>
-                <select
-                    value={selectedDistrito}
-                    onChange={handleDistritoChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
-                    disabled={!selectedEntidad}
-                >
-                    <option value="">Seleccionar Distrito</option>
-                    {distritos.map((distrito) => (
-                        <option key={distrito} value={distrito}>
-                            {`Distrito ${distrito}`}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <br />
-            {/* Selección de sección */}
-            <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
-                <h4>Sección</h4>
-                <select
-                    value={selectedSeccion}
-                    onChange={handleSeccionChange}
-                    className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
-                    disabled={!selectedDistrito}
-                >
-                    <option value="">Seleccionar Sección</option>
-                    {secciones.map((seccion) => (
-                        <option key={seccion} value={seccion}>
-                            {seccion}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <br />
-            {/* Botón para descargar */}
-            <button
-                type="button"
-                onClick={handleDownload}
-                className="text-black bg-warnin-800 hover:bg-succes-900 focus:outline-none focus:ring-4 focus:ring-succes-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 inputs position-absolute top-100 start-50 translate-middle btn btn-warning"
-            >
-                Descargar
-            </button>
+        <div>
+            {token ? (
+                <div className='mb-3 position-absolute top-50 start-50 translate-middle'>
+
+                    {/* Selección de ámbito */}
+                    <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
+                        <h4>Ámbito</h4>
+                        <select
+                            value={ambito}
+                            onChange={handleAmbitoChange}
+                            className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
+                        >
+                            <option value="">Seleccionar Ámbito</option>
+                            <option value="fed">Federal</option>
+                            <option value="loc">Local</option>
+                        </select>
+                    </div>
+                    <br />
+
+                    {/* Selección de entidad */}
+                    <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
+                        <h4>Entidad</h4>
+                        <select
+                            value={selectedEntidad}
+                            onChange={handleEntidadChange}
+                            className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
+                        >
+                            <option value="">Seleccionar Entidad</option>
+                            {entidades.map((entidad) => (
+                                <option key={entidad} value={entidad}>
+                                    {entidad}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <br />
+                    {/* Selección de distrito */}
+                    <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
+                        <h4>Distrito</h4>
+                        <select
+                            value={selectedDistrito}
+                            onChange={handleDistritoChange}
+                            className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
+                            disabled={!selectedEntidad}
+                        >
+                            <option value="">Seleccionar Distrito</option>
+                            {distritos.map((distrito) => (
+                                <option key={distrito} value={distrito}>
+                                    {`Distrito ${distrito}`}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <br />
+                    {/* Selección de sección */}
+                    <div className='home-content d-flex flex-column w-60 p-2 bg-dark-subtle'>
+                        <h4>Sección</h4>
+                        <select
+                            value={selectedSeccion}
+                            onChange={handleSeccionChange}
+                            className="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-rose focus:border-rose inputs"
+                            disabled={!selectedDistrito}
+                        >
+                            <option value="">Seleccionar Sección</option>
+                            {secciones.map((seccion) => (
+                                <option key={seccion} value={seccion}>
+                                    {seccion}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <br />
+                    {/* Botón para descargar */}
+                    <button
+                        type="button"
+                        onClick={handleDownload}
+                        className="text-black bg-warnin-800 hover:bg-succes-900 focus:outline-none focus:ring-4 focus:ring-succes-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 inputs position-absolute top-100 start-50 translate-middle btn btn-warning"
+                    >
+                        Descargar
+                    </button>
+                </div>
+
+            ) : (
+                <RedirectToHome />
+            )}
+
+
+
+
+
+
+
         </div>
     );
-};  
+};
 
 export default MapSelector;

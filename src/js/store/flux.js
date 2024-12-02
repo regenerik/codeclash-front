@@ -69,15 +69,33 @@ const getState = ({ getStore, getActions, setStore }) => {
             getMapUrl: async (url) => {
                 try {
                     console.log("url para ser enviada en getMapUrl action: ", url)// http://localhost:5000/
+
+                    const token = localStorage.getItem('token');
+                    const actions = getActions(); // Para acceder al logout directamente
+                
+                    if (!token) {
+                        console.error("El token es undefined. Asegurate de que esté guardado correctamente.");
+                        actions.logout(); // Llamamos al logout si no hay token
+                        return;
+                    }
+
+
                     const response = await fetch("https://e3digital.onrender.com/get_map_url", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization": "1803-1989-1803-1989",
+                            "Authorization": `Bearer ${token}`
                         },
                         body: JSON.stringify({ url: url }),
                     });
                     console.log("el response en seco: ", response)
+
+                    if (response.status === 401) {
+                        console.error("El token expiró o no es válido. Cerrando sesión...");
+                        actions.logout(); // Logout automático
+                        return;
+                    }
+
                     // Verificar si la respuesta fue exitosa
                     if (!response.ok) {
                         throw new Error(`Error en la solicitud: ${response.status}`);
@@ -131,23 +149,39 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getUsers: async () => {
                 console.log("getUsers ejecutándose...");
-                let token = localStorage.getItem('token');
-
-
+                const token = localStorage.getItem('token');
+                const actions = getActions(); // Para acceder al logout directamente
+            
                 if (!token) {
                     console.error("El token es undefined. Asegurate de que esté guardado correctamente.");
+                    actions.logout(); // Llamamos al logout si no hay token
                     return;
                 }
-
-                let response = await fetch("https://e3digital.onrender.com/users", {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
+            
+                try {
+                    const response = await fetch("https://e3digital.onrender.com/users", {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+            
+                    // Si el token es inválido, se recibe un código 401
+                    if (response.status === 401) {
+                        console.error("El token expiró o no es válido. Cerrando sesión...");
+                        actions.logout(); // Logout automático
+                        return;
                     }
-                });
-
-                let data = await response.json();
-                if (data.lista_usuarios) {
-                    setStore({ ...getStore(), users: data.lista_usuarios });
+            
+                    if (!response.ok) {
+                        throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
+                    }
+            
+                    const data = await response.json();
+                    if (data.lista_usuarios) {
+                        setStore({ ...getStore(), users: data.lista_usuarios });
+                    }
+                } catch (error) {
+                    console.error("Error en getUsers:", error);
                 }
             },
             setUserForEdit: (user) => {
@@ -275,11 +309,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ ...store, wrongPass: booleano })
             },
             logout: () => {
-                const store = getStore()
-                setStore({ ...store, token: "", userName: "" })
+                const store = getStore();
+            
+                setStore({ ...store, token: "", userName: "" });
                 localStorage.removeItem('token');
                 localStorage.removeItem('name');
                 localStorage.removeItem('admin');
+            
+                console.log("LogOut manual o Token vencido...");
             },
             getReportList: async () => {
                 try {

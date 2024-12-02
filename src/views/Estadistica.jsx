@@ -5,6 +5,7 @@ import ResuladosElectorales from '../exp-components/ResultadosElectorales.jsx'
 import InstantResume from '../exp-components/InstantResume.jsx'
 import TotalRanking from '../exp-components/TotalRanking.jsx'
 import TotalResume from '../exp-components/TotalResume.jsx'
+import RedirectToHome from '../components/RedirectHome.jsx';
 
 const Estadistica = () => {
   const [activeTab, setActiveTab] = useState('usuarios');
@@ -63,7 +64,9 @@ const Estadistica = () => {
                           </div>
                       </div>
                   </div>
-              ) : (<h2>Logueate con una cuenta administradora para ver este contenido</h2>)
+              ) : (
+              <RedirectToHome />
+            )
           }
       </div>
   )
