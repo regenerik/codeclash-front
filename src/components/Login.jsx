@@ -83,7 +83,7 @@ const Login = () => {
         }}
       >
         <h1>Login</h1>
-        <div className='input-box'>
+        <div className='input-box tex'>
           <input
             type='email'
             placeholder='E-mail'

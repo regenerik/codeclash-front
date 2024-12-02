@@ -28,11 +28,15 @@ const Estadistica = () => {
   const token = localStorage.getItem('token')
   return (
       <div>
+        
           <Navbar />
+          {/* Imagen temporal para que no se vean los menus cortados */}
+          <img src='https://universidaddepadres.es/wp-content/uploads/humanos_construccion.jpg' class='img-fluid rounded mx-auto d-block'></img>
+
           {
             token ? (
                   <div>
-                      <div className="admin-container">
+                      {/* <div className="admin-container">
                           <div className="admin-tabs">
                               <button
                                   className={`tab-button ${activeTab === 'ResuladosElectorales' ? 'active' : ''}`}
@@ -62,14 +66,18 @@ const Estadistica = () => {
                           <div className="admin-content bg-dark-subtle">
                               {renderTabContent()}
                           </div>
-                      </div>
+                      </div> */}
+                      
                   </div>
+                  
               ) : (
               <RedirectToHome />
             )
           }
       </div>
+      
   )
 }
+
 
 export default Estadistica
