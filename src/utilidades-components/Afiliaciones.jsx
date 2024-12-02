@@ -36,7 +36,7 @@ const Afiliaciones = () => {
 
           <div className='afiliaciones-total'>
             <div className='title'>
-              <h1>Afiliaciones</h1>
+              <h1>Verifica Afiliación</h1>
             </div>
             <div className='inputs-box'>
               <div className="caja-input">
@@ -56,7 +56,7 @@ const Afiliaciones = () => {
                 <input type="text" className='input' name="nombre" onChange={handlerafiliacion} placeholder="nombre" aria-label="nombre" aria-describedby="addon-wrapping" />
               </div>
             </div>
-            <button className='boton-consulta' onClick={handleConsulta}>
+            <button className='boton-consulta btn btn-warning' onClick={handleConsulta}>
               Consultar
             </button>
           </div>

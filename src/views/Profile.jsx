@@ -11,6 +11,8 @@ const Profile = () => {
     return (
         <div>
             <Navbar />
+            <img src='https://universidaddepadres.es/wp-content/uploads/humanos_construccion.jpg' class='img-fluid rounded mx-auto d-block'></img>
+
             <div className="container mt-3 profile-container" >
                 <p style={{ marginLeft: '25px', marginTop: '15px', marginBottom: '20px' }}>
                     Profile Settings

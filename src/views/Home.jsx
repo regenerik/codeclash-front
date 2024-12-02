@@ -19,7 +19,7 @@ const Home = () => {
                         <div className='home-content d-flex flex-column bg-dark-subtle'>
                            <button className="btn btn-dark new-button" onClick={()=>navigate("./estadistica")}>Estadística</button>
                            <button className="btn btn-dark new-button" onClick={()=>navigate("./main")}>Cartografia</button>
-                           <button className="btn btn-dark new-button" onClick={()=>navigate("./utilidades")}>Utilidades</button>
+                           <button className="btn btn-dark new-button" onClick={()=>navigate("./utilidades")}>Herramientas</button>
                         </div>
                     </div>
                 </>

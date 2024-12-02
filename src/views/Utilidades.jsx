@@ -27,7 +27,8 @@ const Utilidades = () => {
                   <div>
                       <div className="admin-container">
                           <div className="admin-tabs">
-                              <button
+        {/* DESHABILITACION DE MENUS PARA QUE NO SE VEAN CORTADOS */}
+                              {/* <button
                                   className={`tab-button ${activeTab === 'Afiliaciones' ? 'active' : ''}`}
                                   onClick={() => setActiveTab('Afiliaciones')}
                               >
@@ -38,7 +39,7 @@ const Utilidades = () => {
                                   onClick={() => setActiveTab('ResumenesInstantaneos')}
                               >
                                   Opcion 2
-                              </button>
+                              </button> */}
                           </div>
                           <div className="admin-content bg-dark-subtle">
                               {renderTabContent()}
