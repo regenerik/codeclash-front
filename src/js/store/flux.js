@@ -13,7 +13,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
         actions: {
             getAfiliacion: async (payload) => {
-                let token = localStorage.getItem('token');
+                const token = localStorage.getItem('token');
+                const actions = getActions(); // Para acceder al logout directamente
+            
+                if (!token) {
+                    console.error("El token es undefined. Asegurate de que esté guardado correctamente.");
+                    actions.logout(); // Llamamos al logout si no hay token
+                    return;
+                }
                 try{
                     const response = await fetch('https://e3digital.onrender.com/consulta-afiliado', {
                         method: 'POST',
@@ -24,7 +31,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(payload)
                     })
                     const data = await response.json();
-                    console.log("esta es la data entrante: ",data)
+                    // console.log("esta es la data entrante: ",data)
+
+                    // Si el token es inválido, se recibe un código 401
+                    if (response.status === 401) {
+                        console.error("El token expiró o no es válido. Cerrando sesión...");
+                        actions.logout(); // Logout automático
+                        return;
+                    }
+
                     if(!data.msg) throw new Error('algo salio mal en la solicitud')
                     alert(data.msg)
                 }catch(e){

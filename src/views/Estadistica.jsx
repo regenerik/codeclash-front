@@ -24,13 +24,13 @@ const Estadistica = () => {
               return <ResuladosElectorales />;
       }
   };
-  const admin = JSON.parse(localStorage.getItem('admin'));
+  
   const token = localStorage.getItem('token')
   return (
       <div>
           <Navbar />
           {
-              admin === true && token ? (
+            token ? (
                   <div>
                       <div className="admin-container">
                           <div className="admin-tabs">
