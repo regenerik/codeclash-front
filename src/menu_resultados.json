@@ -1,0 +1,40 @@
+{
+    "local": {},
+    "federal": {
+      "2018": {
+        "senadurias": {
+          "votos por entidades": {},
+          "votos por partido politico": {}
+        },
+        "diputaciones": {
+          "votos por distritos": {},
+          "votos por partidos politicos y candidatura independiente": {}
+        },
+        "presidencia": {
+          "partido": {},
+          "candidatura": {}
+        }
+      },
+      "2021": {
+        "diputaciones": {
+          "votos por distritos": {},
+          "votos por partidos politicos y candidatura independiente": {}
+        }
+      },
+      "2024": {
+        "senadurias": {
+          "votos por entidades": {},
+          "votos por partido politico": {}
+        },
+        "diputaciones": {
+          "votos por distritos": {},
+          "votos por partidos politicos y candidatura independiente": {}
+        },
+        "presidencia": {
+          "partido": {},
+          "candidatura": {}
+        }
+      }
+    }
+  }
+  

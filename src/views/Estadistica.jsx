@@ -6,6 +6,7 @@ import InstantResume from '../exp-components/InstantResume.jsx'
 import TotalRanking from '../exp-components/TotalRanking.jsx'
 import TotalResume from '../exp-components/TotalResume.jsx'
 import RedirectToHome from '../components/RedirectHome.jsx';
+import ResultadosMenu from '../result-components/ResultadosMenu.jsx';
 
 const Estadistica = () => {
   const [activeTab, setActiveTab] = useState('usuarios');
@@ -30,9 +31,7 @@ const Estadistica = () => {
       <div>
         
           <Navbar />
-          {/* Imagen temporal para que no se vean los menus cortados */}
-          <img src='https://universidaddepadres.es/wp-content/uploads/humanos_construccion.jpg' class='img-fluid rounded mx-auto d-block'></img>
-
+ 
           {
             token ? (
                   <div>
@@ -67,6 +66,8 @@ const Estadistica = () => {
                               {renderTabContent()}
                           </div>
                       </div> */}
+
+                      <ResultadosMenu />
                       
                   </div>
                   
