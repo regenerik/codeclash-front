@@ -109,7 +109,7 @@ const ResultadosMenu = () => {
     <div className="home-wrapper">
       {selectedComponent ? (
         // Renderizar el componente seleccionado
-        <div className="home-content  bg-dark-subtle text-center">
+        <div className="container-fluid text-center">
           <h2 className="border rounded-top mb-4 card-title fw-bolder bg-light border rounded-top ">Resultados</h2>
           <h4 className="border rounded-bottom bg-light text-capitalize border rounded-bottom">{breadcrumbs.join(" · ") || "Inicio"}</h4>
         
