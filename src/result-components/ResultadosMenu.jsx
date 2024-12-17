@@ -113,8 +113,13 @@ const ResultadosMenu = () => {
           <h2 className="border rounded-top mb-4 card-title fw-bolder bg-light border rounded-top ">Resultados</h2>
           <h4 className="border rounded-bottom bg-light text-capitalize border rounded-bottom">{breadcrumbs.join(" · ") || "Inicio"}</h4>
         
-          <div>
+          <div className="row">
+            <div className="col-6">
           {selectedComponent}
+          </div>
+          <div className="col-6">
+            "chart"
+          </div>
           </div>
          
           

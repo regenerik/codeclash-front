@@ -25,14 +25,14 @@ const PresidenciaPartido2024 = () => {
         <div className='home-wrapper container-fluid'  >
            
 
-                <table className=" table-fluid  bg-light align-middle mb-1 m-1 stripped text-center">
+                <table className=" table-fluid  bg-light align-middle mb-1 m-1 stripped text-center p-2">
                     <thead className='border-dark bg-dark border-1'>
                         <tr >
                             <th className="table-dark" scope="col">Partido</th>
                             <th className="table-dark" scope="col">  Total </th>
                             <th className="table-dark" scope="col">  %  </th>
                             <th className="table-dark" scope="col">Lugar</th>
-                            <th className="table-dark" scope="col-8">Grafico</th>
+                            
                         </tr>
                     </thead>
 
@@ -54,7 +54,7 @@ const PresidenciaPartido2024 = () => {
                                                         className="imagen-candidato-movil"
                                                         src={`https://computos2024.ine.mx/assets/img/partidos${item.emblemaPartido}`}
                                                     />
-                                                    <h5>{item.nombrePartido === "CANDIDATURAS NO REGISTRADAS" || item.nombrePartido === "VOTOS NULOS" ? item.nombrePartido : ""}</h5>
+                                                   
                                                 </th>
                                                 <td className='bg-info-subtle'>
                                                     <p className="f17">{(item.total).toLocaleString()}</p>
@@ -64,9 +64,7 @@ const PresidenciaPartido2024 = () => {
                                                 </td >
                                                 {/* ranking */}
                                                 <td><p className="f17">1</p></td>
-                                                <td>
-                                                <progress class="progress" value="83" max="100"></progress>
-                                                </td>
+                                                
                                             </tr>
                                         </tbody>
 
