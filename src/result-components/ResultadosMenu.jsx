@@ -104,23 +104,26 @@ const ResultadosMenu = () => {
   }, [selectedComponent]);
 
   return (
-    <div className="d-flex justify-content-center p-4">
+    <div className="home-wrapper">
       {selectedComponent ? (
         // Renderizar el componente seleccionado
-        <div className="card shadow p-4 w-100 text-center">
+        <div className="home-content d-flex flex-column bg-dark-subtle text-center">
           <h1 className="mb-4">Resultados</h1>
+          <div className="home-wrapper col-4">
           {selectedComponent}
+          </div>
         </div>
       ) : (
         // Mostrar el menú si no hay componente seleccionado
-        <div className="card shadow p-4 w-100 text-center">
-          <h1 className="mb-4">Selección de Resultados</h1>
+        <div className="home-wrapper position-absolute top-50 start-50 translate-middle">
+        <div className="home-content d-flex flex-column bg-dark-subtle text-center">
+          <h1 className="mb-4">Ámbito</h1>
           <div>
             <p className="mb-4">Ruta seleccionada: {breadcrumbs.join(" > ") || "Inicio"}</p>
             <ul className="list-unstyled">
               {Object.keys(currentMenu).map((key) => (
                 <li key={key} className="mb-2">
-                  <button className="btn btn-primary w-100" onClick={() => handleSelect(key)}>
+                  <button className="btn btn-dark new-button text-capitalize" onClick={() => handleSelect(key)}>
                     {key}
                   </button>
                 </li>
@@ -131,10 +134,11 @@ const ResultadosMenu = () => {
             <button className="btn btn-secondary me-2" onClick={goBack} disabled={breadcrumbs.length === 0}>
               Volver
             </button>
-            <button className="btn btn-success" onClick={handleConfirm} disabled={breadcrumbs.length === 0}>
+            <button className="btn btn-warning" onClick={handleConfirm} disabled={breadcrumbs.length === 0}>
               Confirmar
             </button>
           </div>
+        </div>
         </div>
       )}
     </div>
