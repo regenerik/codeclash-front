@@ -25,13 +25,13 @@ const PresidenciaPartido2024 = () => {
         <div className='home-wrapper container-fluid'  >
            
 
-                <table className=" table align-middle mb-1 m-1 table-stripped text-center  table-bordered border-1">
-                    <thead className='border-dark border-1'>
+                <table className=" table-fluid  bg-light align-middle mb-1 m-1 stripped text-center">
+                    <thead className='border-dark bg-dark border-1'>
                         <tr >
-                            <th scope="col"></th>
-                            <th className="table-dark" scope="col">Total de Votos</th>
-                            <th className="table-dark" scope="col">%</th>
-                            <th className="table-dark" scope="col">Ranking</th>
+                            <th className="table-dark" scope="col">Partido</th>
+                            <th className="table-dark" scope="col">  Total </th>
+                            <th className="table-dark" scope="col">  %  </th>
+                            <th className="table-dark" scope="col">Lugar</th>
                             <th className="table-dark" scope="col-8">Grafico</th>
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@ const PresidenciaPartido2024 = () => {
                                 dataToFill.votacionPartidosConDistribucion.map((item, index) => {
                                     return (
                                         <tbody key={index}  >
-                                            <tr className='border-dark border-1'>
+                                            <tr className='border-dark border-1 table-stripped'>
                                                 <th scope="row">
                                                     <img alt=""
                                                         style={{
@@ -56,14 +56,14 @@ const PresidenciaPartido2024 = () => {
                                                     />
                                                     <h5>{item.nombrePartido === "CANDIDATURAS NO REGISTRADAS" || item.nombrePartido === "VOTOS NULOS" ? item.nombrePartido : ""}</h5>
                                                 </th>
-                                                <td>
+                                                <td className='bg-info-subtle'>
                                                     <p className="f17">{(item.total).toLocaleString()}</p>
                                                 </td>
                                                 <td>
-                                                    <p className="f17">{(item.porcentaje).toFixed(2)}</p>
+                                                    <p className="f17">{(item.porcentaje).toFixed(2)}%</p>
                                                 </td >
                                                 {/* ranking */}
-                                                <td></td>
+                                                <td><p className="f17">1</p></td>
                                                 <td>
                                                 <progress class="progress" value="83" max="100"></progress>
                                                 </td>
