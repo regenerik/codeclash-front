@@ -22,7 +22,7 @@ const PresidenciaPartido2024 = () => {
         getData();
     }, [])
     return (
-        <div className='container-fluid'  >
+        <div className='home-wrapper container-fluid'  >
            
 
                 <table className=" table align-middle mb-1 m-1 table-stripped text-center  table-bordered border-1">

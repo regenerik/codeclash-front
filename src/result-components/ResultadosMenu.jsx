@@ -109,11 +109,11 @@ const ResultadosMenu = () => {
     <div className="home-wrapper">
       {selectedComponent ? (
         // Renderizar el componente seleccionado
-        <div className="home-content d-flex flex-column bg-dark-subtle text-center">
-          <h1 className="mb-4 card-title fw-bolder bg-light">Resultados</h1>
-          <h3 className=" bg-light text-capitalize">{breadcrumbs.join(" · ") || "Inicio"}</h3>
+        <div className="home-content  bg-dark-subtle text-center">
+          <h2 className="border rounded-top mb-4 card-title fw-bolder bg-light border rounded-top ">Resultados</h2>
+          <h4 className="border rounded-bottom bg-light text-capitalize border rounded-bottom">{breadcrumbs.join(" · ") || "Inicio"}</h4>
         
-          <div >
+          <div>
           {selectedComponent}
           </div>
          
@@ -126,8 +126,8 @@ const ResultadosMenu = () => {
           
         <div className="home-content d-flex flex-column bg-dark-subtle text-center">
           
-          <h3 className=" fw-bolder bg-light text-capitalize">Resultados</h3>
-          <h5 className=" bg-light text-capitalize">{breadcrumbs.join(" · ") || "Inicio"}</h5>
+          <h3 className=" border rounded-top fw-bolder bg-light text-capitalize">Resultados</h3>
+          <h5 className=" border rounded-bottom bg-light text-capitalize">{breadcrumbs.join(" · ") || "Inicio"}</h5>
           <div>
             
             <ul className="list-unstyled">
