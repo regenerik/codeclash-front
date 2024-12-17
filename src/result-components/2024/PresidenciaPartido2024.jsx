@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { TbLayoutSidebarLeftExpandFilled } from 'react-icons/tb'
+import 'charts.css';
+
+
+
 
 const PresidenciaPartido2024 = () => {
-
-
     const [dataToFill, setDataToFill] = useState({})
-
-
     useEffect(() => {
         const getData = async () => {
             try {
@@ -17,75 +18,75 @@ const PresidenciaPartido2024 = () => {
                 console.error(e)
             }
             console.log("Obteniendo datos...");
-          };
-          getData();
+        };
+        getData();
     }, [])
-
-
     return (
-        <div>
+        <div className='container-fluid'  >
+           
 
-            Presidencia Partido 2024
+                <table className=" table align-middle mb-1 m-1 table-stripped text-center  table-bordered border-1">
+                    <thead className='border-dark border-1'>
+                        <tr >
+                            <th scope="col"></th>
+                            <th className="table-dark" scope="col">Total de Votos</th>
+                            <th className="table-dark" scope="col">%</th>
+                            <th className="table-dark" scope="col">Ranking</th>
+                            <th className="table-dark" scope="col-8">Grafico</th>
+                        </tr>
+                    </thead>
 
-            {
-                dataToFill &&
-                (
-                    dataToFill.votacionPartidosConDistribucion ?
-                        dataToFill.votacionPartidosConDistribucion.map((item, index) => {
-                            return (
-                                <table key={index} className="table mb-4 m-3">
-                                    <thead className="row card-body bgCard tabla-votos-s" style={{ marginLeft: '0px', marginRight: '0px' }}>
-                                        <div className="col-12 pb-2">
-                                            <div>
-                                                <div className="padding-t-12 dis-flex" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                    <img
-                                                        alt=""
+
+                    {
+                        dataToFill &&
+                        (
+                            dataToFill.votacionPartidosConDistribucion ?
+                                dataToFill.votacionPartidosConDistribucion.map((item, index) => {
+                                    return (
+                                        <tbody key={index}  >
+                                            <tr className='border-dark border-1'>
+                                                <th scope="row">
+                                                    <img alt=""
                                                         style={{
-                                                            height: "50px", // Tamaño ajustado
+                                                            height: "50px", // Tamaño ajustado 
                                                             width: "auto"   // Mantiene la proporción
                                                         }}
                                                         className="imagen-candidato-movil"
                                                         src={`https://computos2024.ine.mx/assets/img/partidos${item.emblemaPartido}`}
                                                     />
-                                                    <h3>{item.nombrePartido === "CANDIDATURAS NO REGISTRADAS" || item.nombrePartido === "VOTOS NULOS" ? item.nombrePartido : ""}</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-6 txtNegro font-medium">
-                                            <p className="f17">Total de votos</p>
-                                            <p className="f17">{item.total}</p>
-                                        </div>
-                                        <div className="col-6 font-medium txtNegro text-end">
-                                            <p className="f17">Porcentaje</p>
-                                            <p className="f17">{item.porcentaje}%</p>
-                                        </div>
-                                    </thead>
-                                    <ul className="list-group list-group-flush">
-                                        <li className="list-group-item bgCard-2 f18 padding-l-25 font-medium txtAzulM2">Votos</li>
-                                        <li className="list-group-item bgCard-2 d-flex justify-content-between txtAzulM2" style={{ paddingLeft: '2.5em', paddingRight: '27px' }}>
-                                            <span className="font-regular f14">En Territorio Nacional</span>
-                                            <span className="font-bold f16">{item.totalVN}</span>
-                                        </li>
-                                        <li className="list-group-item bgCard-1 d-flex justify-content-between txtAzulM2" style={{ paddingLeft: '2.5em', paddingRight: '27px' }}>
-                                            <span className="font-regular f14">En el Extranjero*</span>
-                                            <span className="font-bold f16">{item.totalVE}</span>
-                                        </li>
-                                    </ul>
-                                </table>
-                            )
-                        })
-                        :
-                        (
-                            <div>
-                                <h5>Cargando</h5>
-                            </div>
+                                                    <h5>{item.nombrePartido === "CANDIDATURAS NO REGISTRADAS" || item.nombrePartido === "VOTOS NULOS" ? item.nombrePartido : ""}</h5>
+                                                </th>
+                                                <td>
+                                                    <p className="f17">{(item.total).toLocaleString()}</p>
+                                                </td>
+                                                <td>
+                                                    <p className="f17">{(item.porcentaje).toFixed(2)}</p>
+                                                </td >
+                                                {/* ranking */}
+                                                <td></td>
+                                                <td>
+                                                <progress class="progress" value="83" max="100"></progress>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    )
+                                })
+                                :
+                                (
+                                    <div>
+                                        <h5>Cargando</h5>
+                                    </div>
+                                )
+
+
                         )
+                    }
 
+                </table>
+            </div>
 
-                )
-            }
-
-        </div>
+      
     )
 }
 
