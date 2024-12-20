@@ -34,13 +34,13 @@ const Afiliaciones = () => {
       {
         token ? (
 
-          <div className='afiliaciones-total'>
-            <div className='title'>
-              <h1>Verifica Afiliación</h1>
+          <div className='afiliaciones-total '>
+            <div className='title '>
+              <h2 className="border rounded-top mb-4 card-title fw-bolder bg-light border rounded-top ">Verifica Afiliación</h2>
             </div>
-            <div className='inputs-box'>
+            <div className='inputs-box '>
               <div className="caja-input">
-                <span className='adjust'>Clave de elector</span>
+                <span className='adjust '>Clave de elector</span>
                 <input type="text" className='input' name="clave_elector" onChange={handlerafiliacion} placeholder="clave" aria-label="clave" aria-describedby="addon-wrapping" />
               </div>
               <div className="caja-input">
