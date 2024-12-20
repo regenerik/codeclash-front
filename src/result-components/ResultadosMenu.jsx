@@ -20,6 +20,8 @@ import DiputacionesVotosPartidos2024 from "./2024/DiputacionesVotosPartidos2024"
 import PresidenciaPartido2024 from "./2024/PresidenciaPartido2024";
 import PresidenciaCandidatura2024 from "./2024/PresidenciaCandidatura2024";
 
+import PieChart from "./2024/PieChart";
+
 
 const ResultadosMenu = () => {
   const [currentMenu, setCurrentMenu] = useState(menuData);
@@ -113,16 +115,9 @@ const ResultadosMenu = () => {
           <h2 className="border rounded-top mb-4 card-title fw-bolder bg-light border rounded-top ">Resultados</h2>
           <h4 className="border rounded-bottom bg-light text-capitalize border rounded-bottom">{breadcrumbs.join(" · ") || "Inicio"}</h4>
         
-          <div className="row">
-            <div className="col-6">
+          <div className="row home-wrapper" >
           {selectedComponent}
           </div>
-          <div className="col-6">
-            "chart"
-          </div>
-          </div>
-         
-          
         </div>
       ) : (
         // Mostrar el menú si no hay componente seleccionado

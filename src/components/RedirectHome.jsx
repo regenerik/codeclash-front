@@ -14,7 +14,7 @@ const RedirectToHome = () => {
 
     return (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <h3>Sesión vencida. Redirigiendo a login...</h3>
+            <h3>Tu sesión ha expirado. Ingresa de nuevo...</h3>
         </div>
     );
 };

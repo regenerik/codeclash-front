@@ -11,7 +11,7 @@
   }
   
 .footer:hover {
-    color: #f0a500;
+    color: #f00000;
     /* Cambia el color al pasar el mouse */
     cursor: pointer;
     /* Agrega un puntero interactivo */
