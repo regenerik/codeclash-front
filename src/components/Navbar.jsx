@@ -33,7 +33,7 @@ const Navbar = () => {
             <div className="container-fluid">
                 <div className='logo_and_title'>
                     <img className="logo" src={logo2} alt="logo apoyo a la gestión" onClick={handleShowRegister} />
-                    <h4 className='title_navbar'>Digital</h4>
+                    <h4 className='title_navbar'>uanthink</h4>
                 </div>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,9 +108,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-
-// {store.userName && (
-//     <li className="nav-item">
-//         <Link className={isActive('/main')} to="/main">Panel</Link>
-//     </li>
-// )}

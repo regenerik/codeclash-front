@@ -1,73 +1,73 @@
+/* Navbar Styles */
 .logo_and_title {
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 }
 
 .logo {
-  max-width: 15%;
+  max-width: 50px; /* Tamaño adecuado sin distorsión */
   height: auto;
   display: block;
-  margin-right: 1vh;
 }
 
 .title_navbar {
-  color: white;font-weight: 900;
-  font-size: medium;
+  color: #222; /* Casi negro */
+  font-weight: bold;
+  font-size: 1.2rem;
   margin: 0;
+  letter-spacing: 1px; 
 }
 
 .navbar {
-  background-color:#000000;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra leve */
-  position: sticky; /* Hace que se quede en la parte de arriba al hacer scroll */
-  top: 0; /* Arriba del todo */
-  z-index: 1000; /* Aseguráte que quede por encima de otros elementos */
+  background-color: #f8f9fa; /* Blanco hielo */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera y elegante */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 10px 20px;
 }
 
 .navbar .nav-link {
-  color: white; /* Cambiá por el color que quieras */
-  text-decoration: none; /* Opcional: quita el subrayado */
+  color: #222; /* Mismo color que el título */
+  text-decoration: none;
+  padding: 8px 12px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
 }
 
 .navbar .nav-link:hover {
-  color: #ccf456; /* Cambia a otro color al pasar el mouse */
-  font-weight: bolder;
+  background-color: rgba(34, 34, 34, 0.1);
+  font-weight: bold;
+}
 
-  
-  ;
+.navbar .nav-link:active {
+  background-color: #ccc; /* Gris más oscuro al hacer clic */
 }
 
 .perfil {
-  color: #fff; /* Estilo inicial */
+  color: #222; /* Color de botones igual al título */
   background-color: transparent;
-  transition: all 0.3s ease; /* Para un efecto suave */
+  transition: all 0.3s ease;
+}
+
+.perfil:hover {
+  background-color: rgba(34, 34, 34, 0.1);
 }
 
 .perfil:focus,
 .perfil:active,
 .dropdown.show .perfil {
-  color: white; /* Mantiene el texto blanco */
-  background-color: #333; /* Fondo oscuro */
-  outline: none;
+  background-color: #ccc; /* Indicación de selección */
 }
 
-.perfil:hover {
-  color: white;
-  background-color: #444; /* Fondo un poco más claro */
-}
 @media (max-width: 427px) {
   .navbar .logo_and_title {
-    flex: 1; /* Ocupa el espacio restante */
+    flex: 1;
   }
 
   .navbar-toggler {
-    margin-left: auto; /* Empuja el botón hacia la derecha */
-    color: w#ccf456;
+    margin-left: auto;
   }
-}
-
-
-.navbar .navbar-toggler .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }

@@ -6,7 +6,7 @@ const Footer = () => {
     
     return (
     <footer className="footer">
-      &copy; 2024 Digital. Todos los derechos reservados.
+      &copy; 2025 QuanThink. Todos los derechos reservados.
     </footer>
   );
 }
