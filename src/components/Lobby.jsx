@@ -75,13 +75,15 @@ export default function Lobby() {
         if (!username) return
         const pass = r.hasPassword ? prompt('Contraseña:') : null
         if (r.hasPassword && pass === null) return
+        // asegúrate de que r.participants sea siempre un array:
+        const existing = Array.isArray(r.participants) ? r.participants : []
         socket.emit('join_room', { room_id: r.id, password: pass, username })
         // navegamos de inmediato
         navigate(`/room/${r.id}`, {
             state: {
                 roomName: r.name,
                 difficulty: r.difficulty,
-                participants: [...r.participants, username],
+                participants: [...existing, username],
                 isHost: false
             }
         })
