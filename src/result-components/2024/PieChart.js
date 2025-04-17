@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import PresidenciaPartido2024 from './PresidenciaPartido2024';
 
 const PieChart = () => {
 

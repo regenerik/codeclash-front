@@ -20,8 +20,6 @@ import DiputacionesVotosPartidos2024 from "./2024/DiputacionesVotosPartidos2024"
 import PresidenciaPartido2024 from "./2024/PresidenciaPartido2024";
 import PresidenciaCandidatura2024 from "./2024/PresidenciaCandidatura2024";
 
-import PieChart from "./2024/PieChart";
-
 
 const ResultadosMenu = () => {
   const [currentMenu, setCurrentMenu] = useState(menuData);

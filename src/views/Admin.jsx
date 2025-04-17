@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './Admin.css';
 import Navbar from '../components/Navbar.jsx'
-import Usuarios from '../adm-components/Usuarios.jsx';
 import Reportes from '../adm-components/Reportes.jsx';
 import Errores from '../adm-components/Errores.jsx';
 import Servidor from '../adm-components/Servidor.jsx';
@@ -12,8 +11,6 @@ const Admin = () => {
 
     const renderTabContent = () => {
         switch (activeTab) {
-            case 'usuarios':
-                return <Usuarios />;
             case 'reportes':
                 return <Reportes />;
             case 'errores':
@@ -21,7 +18,7 @@ const Admin = () => {
             case 'servidor':
                 return <Servidor />;
             default:
-                return <Usuarios />;
+                return <Servidor />;
         }
     };
     const admin = JSON.parse(localStorage.getItem('admin'));
