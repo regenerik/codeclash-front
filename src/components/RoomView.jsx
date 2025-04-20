@@ -4,6 +4,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import socket from '../socket'
 import Chat from './Chat'
 import MatchControl from './MatchControl'
+import ExerciseBattle from './ExerciseBattle'
 
 export default function RoomView() {
   const { id } = useParams()
@@ -16,6 +17,7 @@ export default function RoomView() {
     username
   } = state || {}
   const [participants, setParticipants] = useState(initialParticipants)
+  const [gameStarted, setGameStarted] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -81,13 +83,18 @@ export default function RoomView() {
       <button onClick={handleExit}>
         {isHost ? 'Cerrar y salir al lobby' : 'Volver al Lobby'}
       </button>
-      +      <MatchControl
-        roomId={id}
-        username={username}
-        isHost={isHost}
-        participants={participants}
-      />
-      <Chat roomId={id} username={username} />
+
+      {!gameStarted
+        ? <MatchControl
+          roomId={id}
+          username={username}
+          isHost={isHost}
+          participants={participants}
+          onGameStart={() => setGameStarted(true)}
+        />
+        : <ExerciseBattle roomId={id} username={username} />
+      }
+      { !gameStarted && <Chat roomId={id} username={username} /> }
     </div>
   )
 }
