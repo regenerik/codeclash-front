@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import socket from '../socket'
 import Chat from './Chat'
+import MatchControl from './MatchControl'
 
 export default function RoomView() {
   const { id } = useParams()
@@ -80,6 +81,12 @@ export default function RoomView() {
       <button onClick={handleExit}>
         {isHost ? 'Cerrar y salir al lobby' : 'Volver al Lobby'}
       </button>
+      +      <MatchControl
+        roomId={id}
+        username={username}
+        isHost={isHost}
+        participants={participants}
+      />
       <Chat roomId={id} username={username} />
     </div>
   )
