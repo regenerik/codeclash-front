@@ -19,8 +19,9 @@ export default function Lobby() {
       roomsRef.current = rooms
     }
     const handleRoomCreated = ({ id, roomName, difficulty, participants }) => {
+      const [creator] = participants
       navigate(`/room/${id}`, {
-        state: { roomName, difficulty, participants, isHost: true }
+        state: { roomName, difficulty, participants, isHost: true,username: creator }
       })
     }
     const handleError = ({ msg }) => alert(msg)
@@ -55,15 +56,31 @@ export default function Lobby() {
     if (!username) return
     const pass = r.hasPassword ? prompt('Contraseña:') : null
     if (r.hasPassword && pass === null) return
-    socket.emit('join_room', { room_id: r.id, password: pass, username })
-    navigate(`/room/${r.id}`, {
-      state: {
-        roomName: r.name,
-        difficulty: r.difficulty,
-        participants: [...(Array.isArray(r.participants) ? r.participants : []), username],
-        isHost: false
+    // socket.emit('join_room', { room_id: r.id, password: pass, username })
+    // navigate(`/room/${r.id}`, {
+    //   state: {
+    //     roomName: r.name,
+    //     difficulty: r.difficulty,
+    //     participants: [...(Array.isArray(r.participants) ? r.participants : []), username],
+    //     isHost: false,
+    //     username
+    //   }
+    // })
+    socket.emit(
+      'join_room',
+      { room_id: r.id, password: pass, username },
+      (res) => {           // callback
+        if (res.success) {
+          navigate(`/room/${r.id}`, { state: {
+            roomName: r.name,
+            difficulty: r.difficulty,
+            participants: [...r.participants, username],
+            isHost: false,
+            username
+          }})
+        }
       }
-    })
+    )
   }
 
   return (

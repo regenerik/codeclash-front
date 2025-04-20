@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import socket from '../socket'
+import Chat from './Chat'
 
 export default function RoomView() {
   const { id } = useParams()
@@ -10,7 +11,8 @@ export default function RoomView() {
     roomName = `Sala ${id}`,
     difficulty,
     participants: initialParticipants = [],
-    isHost
+    isHost,
+    username
   } = state || {}
   const [participants, setParticipants] = useState(initialParticipants)
   const navigate = useNavigate()
@@ -67,6 +69,7 @@ export default function RoomView() {
       <button onClick={handleExit}>
         {isHost ? 'Cerrar y salir al lobby' : 'Volver al Lobby'}
       </button>
+      <Chat roomId={id} username={username} />
     </div>
   )
 }
