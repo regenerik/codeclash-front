@@ -16,62 +16,46 @@ export default function RoomView() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // 1) Escucho actualizaciones de lista
     const updateHandler = ({ participants }) => {
       setParticipants(participants)
     }
-    socket.on('update_participants', updateHandler)
-
-    // 2) Escucho si borran la sala
-    const deletedHandler = ({ room_id }) => {
-        if (String(room_id) === id) {
-          alert('La sala fue eliminada. Volviendo al Lobby.')
-          navigate('/')
-        }
+    const closedHandler = (data) => {
+      console.log('recibí room_deleted', data)
+      const closedId = data.room_id || data.roomId
+      if (String(closedId) === id) {
+        alert('La sala fue cerrada. Volviendo al Lobby.')
+        navigate('/')
       }
-    socket.on('room_deleted', deletedHandler)
+    }
+
+    socket.on('update_participants', updateHandler)
+    socket.on('room_deleted', closedHandler)
 
     return () => {
       socket.off('update_participants', updateHandler)
-      socket.off('room_deleted', deletedHandler)
+      socket.off('room_deleted', closedHandler)
     }
   }, [id, navigate])
 
-  const goBack = () => {
-    // TANTO host como invitado emiten leave_room
-    socket.emit('leave_room', { room_id: id })
-    navigate('/')
-  }
-
-  const deleteRoom = () => {
-    if (window.confirm('¿Estás seguro que querés eliminar esta sala?')) {
-      socket.emit('delete_room', { room_id: id })
-      // la instancia de room_deleted también te llevará al lobby
+  const handleExit = () => {
+    if (isHost) {
+      if (window.confirm('¿Querés cerrar la sala y volver al lobby?')) {
+        socket.emit('close_room', { room_id: id })
+        navigate('/')
+      }
+    } else {
+      socket.emit('leave_room', { room_id: id })
+      navigate('/')
     }
   }
 
   return (
-    <div style={{ padding:20 }}>
-      <h2 style={{ display:'inline' }}>🎮 Sala: {roomName}</h2>
-      {isHost && (
-        <button
-          onClick={deleteRoom}
-          title="Eliminar sala"
-          style={{
-            marginLeft:12,
-            background:'none',
-            border:'none',
-            cursor:'pointer',
-            fontSize:'1.2em',
-            color:'#c00'
-          }}
-        >
-          🗑️
-        </button>
-      )}
-      <h6>Número de sala: {id}</h6>
-      <p>Dificultad: <strong>{difficulty}</strong></p>
-
+    <div style={{ padding: 20 }}>
+      <h2>🎮 Sala: {roomName}</h2>
+      <h6>ID: {id}</h6>
+      <p>
+        Dificultad: <strong>{difficulty}</strong>
+      </p>
       <h3>Jugadores conectados:</h3>
       <ul>
         {participants.length > 0
@@ -79,9 +63,10 @@ export default function RoomView() {
           : <li>(esperando jugadores…)</li>
         }
       </ul>
-
       <p>{isHost ? 'Vos sos el creador' : 'Estás invitado'}</p>
-      <button onClick={goBack}>Volver al Lobby</button>
+      <button onClick={handleExit}>
+        {isHost ? 'Cerrar y salir al lobby' : 'Volver al Lobby'}
+      </button>
     </div>
   )
 }
