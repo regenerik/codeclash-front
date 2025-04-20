@@ -18,6 +18,7 @@ export default function RoomView() {
   } = state || {}
   const [participants, setParticipants] = useState(initialParticipants)
   const [gameStarted, setGameStarted] = useState(false)
+  const [battleMinutes, setBattleMinutes] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -90,11 +91,14 @@ export default function RoomView() {
           username={username}
           isHost={isHost}
           participants={participants}
-          onGameStart={() => setGameStarted(true)}
+          onGameStart={(mins) => {
+            setBattleMinutes(mins)
+            setGameStarted(true)
+          }}
         />
-        : <ExerciseBattle roomId={id} username={username} />
+        : <ExerciseBattle roomId={id} username={username} battleMinutes={battleMinutes} />
       }
-      { !gameStarted && <Chat roomId={id} username={username} /> }
+      {!gameStarted && <Chat roomId={id} username={username} />}
     </div>
   )
 }

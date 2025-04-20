@@ -10,9 +10,15 @@ export default function MatchControl({ roomId, username, isHost, participants, o
   useEffect(() => {
     socket.on('timer_updated', ({ minutes }) => setTimer(minutes))
     socket.on('ready_updated', ({ username: u, ready }) => setReadyStatus(prev => ({ ...prev, [u]: ready })))
-    socket.on('start_countdown', ({ seconds }) => setCountdown(seconds))
+    socket.on('start_countdown', ({ seconds }) => {
+        console.log('[MatchControl] start_countdown llegó al cliente:', seconds)
+        setCountdown(seconds)
+      })
     socket.on('cancel_countdown', () => setCountdown(null))
-    socket.on('game_started', () => onGameStart?.())
+    socket.on('game_started', ({ battleMinutes }) => {
+      console.log('[MatchControl] game_started llegó al cliente:', battleMinutes)
+      onGameStart?.(battleMinutes)
+    })
 
     return () => {
       socket.off('timer_updated')
@@ -23,16 +29,18 @@ export default function MatchControl({ roomId, username, isHost, participants, o
     }
   }, [onGameStart])
 
+  // Cuenta regresiva local y disparo de inicio de partida usando el valor timer
   useEffect(() => {
     if (countdown == null) return
     if (countdown <= 0) {
+      // Local fallback: use current timer setting
+      onGameStart?.(timer)
       setCountdown(null)
-      onGameStart?.()
       return
     }
     const t = setTimeout(() => setCountdown(countdown - 1), 1000)
     return () => clearTimeout(t)
-  }, [countdown, onGameStart])
+  }, [countdown, onGameStart, timer])
 
   const handleTimerChange = e => {
     const m = Number(e.target.value)
