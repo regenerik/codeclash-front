@@ -51,6 +51,17 @@ export default function RoomView() {
     }
   }
 
+  // cuando cierra pestaña / recarga
+  useEffect(() => {
+    const onUnload = () => {
+      socket.emit('leave_room', { room_id: id })
+    }
+    window.addEventListener('beforeunload', onUnload)
+    return () => {
+      window.removeEventListener('beforeunload', onUnload)
+    }
+  }, [id])
+
   return (
     <div style={{ padding: 20 }}>
       <h2>🎮 Sala: {roomName}</h2>
