@@ -83,9 +83,13 @@ export default function Lobby() {
     )
   }
 
+  const handlerGoToNewLobby = () =>{
+    navigate('/lobbysection')
+  }
   return (
     <div style={{ padding: 20 }}>
       <h1>🏠 Lobby CodeClash</h1>
+      <button onClick={handlerGoToNewLobby}>ir al nuevo lobby</button>
       <div style={{ marginBottom: 10 }}>
         <input
           placeholder="Nombre de la sala"

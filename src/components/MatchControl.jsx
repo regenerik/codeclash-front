@@ -1,4 +1,3 @@
-// src/components/MatchControl.jsx
 import React, { useState, useEffect } from 'react'
 import socket from '../socket'
 
@@ -11,9 +10,9 @@ export default function MatchControl({ roomId, username, isHost, participants, o
     socket.on('timer_updated', ({ minutes }) => setTimer(minutes))
     socket.on('ready_updated', ({ username: u, ready }) => setReadyStatus(prev => ({ ...prev, [u]: ready })))
     socket.on('start_countdown', ({ seconds }) => {
-        console.log('[MatchControl] start_countdown llegó al cliente:', seconds)
-        setCountdown(seconds)
-      })
+      console.log('[MatchControl] start_countdown llegó al cliente:', seconds)
+      setCountdown(seconds)
+    })
     socket.on('cancel_countdown', () => setCountdown(null))
     socket.on('game_started', ({ battleMinutes }) => {
       console.log('[MatchControl] game_started llegó al cliente:', battleMinutes)
@@ -29,11 +28,9 @@ export default function MatchControl({ roomId, username, isHost, participants, o
     }
   }, [onGameStart])
 
-  // Cuenta regresiva local y disparo de inicio de partida usando el valor timer
   useEffect(() => {
     if (countdown == null) return
     if (countdown <= 0) {
-      // Local fallback: use current timer setting
       onGameStart?.(timer)
       setCountdown(null)
       return
@@ -55,28 +52,35 @@ export default function MatchControl({ roomId, username, isHost, participants, o
   }
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: 12, marginTop: 20, borderRadius: 8, maxWidth: 500 }}>
+    <div style={{ border: '1px solid #555', padding: 12, marginTop: 20, borderRadius: 8, maxWidth: 500, background: '#2d3748' }}>
       <div>
-        <strong>Tiempo de partida:</strong>{' '}
+        <strong style={{ color: '#fff' }}>Tiempo de partida:</strong>{' '}
         {isHost
           ? (
-            <select value={timer} onChange={handleTimerChange}>
+            <select
+              value={timer}
+              onChange={handleTimerChange}
+              style={{ background: '#374151', color: '#fff', border: '1px solid #555', borderRadius: 4, padding: '4px 8px' }}
+            >
               {[5, 10, 15, 20].map(v => <option key={v} value={v}>{v} min</option>)}
             </select>
           )
-          : <span>{timer} min</span>
+          : <span style={{ color: '#fff' }}>{timer} min</span>
         }
       </div>
       <div style={{ marginTop: 10 }}>
         {participants.map(u => (
-          <div key={u}>{u} {readyStatus[u] ? '✔️' : '❌'}</div>
+          <div key={u} style={{ color: '#fff' }}>{u} {readyStatus[u] ? '✔️' : '❌'}</div>
         ))}
       </div>
-      <button onClick={toggleReady} style={{ marginTop: 10 }}>
+      <button
+        onClick={toggleReady}
+        style={{ marginTop: 10, background: '#374151', color: '#fff', padding: '8px 12px', border: 'none', borderRadius: 4, cursor: 'pointer' }}
+      >
         {readyStatus[username] ? 'Todavía no' : 'Estoy list@'}
       </button>
       {countdown != null && (
-        <div style={{ marginTop: 10, fontSize: '1.2em' }}>
+        <div style={{ marginTop: 10, fontSize: '1.2em', color: '#fff' }}>
           Comienza en: {countdown}...
         </div>
       )}

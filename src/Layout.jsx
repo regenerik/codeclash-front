@@ -11,8 +11,10 @@ import Directorio from './views/Directorio.jsx';
 import socket from "./socket";
 import Lobby from './components/Lobby.jsx';
 import RoomView from './components/RoomView.jsx'
-
+import LobbySection from './components/LobbySection.jsx';
+import RoomViewBest from './components/RoomViewBest.jsx';
 import Main from './views/Main.js';
+
 
 const Layout = () => {
 
@@ -37,9 +39,11 @@ const Layout = () => {
     <div>
         <BrowserRouter basename={basename}>
             <Routes>
-                <Route exact path="/" element={<Lobby/>}/>
+                <Route exact path="/lobby" element={<Lobby/>}/>
+                <Route exact path="/lobbysection" element={<LobbySection/>} />
+                <Route exact path="/roomviewbest/:id" element={<RoomViewBest/>} />
                 <Route path="/room/:id" element={<RoomView />} />
-                <Route exact path="/home" element={<Main/>}/>
+                <Route exact path="/" element={<Main/>}/>
                 <Route exact path="/contact" element={<Contact/>}/>
                 <Route exact path="/main" element={<Main/>}/>
                 <Route exact path="/loginregister" element={<LoginRegisterView/>}/>

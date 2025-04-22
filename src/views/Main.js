@@ -6,7 +6,7 @@ import HowItWorks from '../components/HowItWorks';
 import CTASection from '../components/CTASection';
 import Footer from '../components/Footer';
 
-const App = () => {
+const Main = () => {
   const [currentPage] = useState('home');
 
   return (
@@ -25,4 +25,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Main;
