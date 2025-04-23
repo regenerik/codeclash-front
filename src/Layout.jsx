@@ -14,6 +14,8 @@ import RoomView from './components/RoomView.jsx'
 import LobbySection from './components/LobbySection.jsx';
 import RoomViewBest from './components/RoomViewBest.jsx';
 import Main from './views/Main.js';
+import RegisterNew from './components/RegisterNew.jsx';
+import LoginNew from './components/LoginNew.jsx';
 
 
 const Layout = () => {
@@ -40,8 +42,10 @@ const Layout = () => {
         <BrowserRouter basename={basename}>
             <Routes>
                 <Route exact path="/lobby" element={<Lobby/>}/>
+                <Route exact path="/login-new" element={<LoginNew/>}/>
                 <Route exact path="/lobbysection" element={<LobbySection/>} />
                 <Route exact path="/roomviewbest/:id" element={<RoomViewBest/>} />
+                <Route exact path="/register" element={<RegisterNew/>} />
                 <Route path="/room/:id" element={<RoomView />} />
                 <Route exact path="/" element={<Main/>}/>
                 <Route exact path="/contact" element={<Contact/>}/>

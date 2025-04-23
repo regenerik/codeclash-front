@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
+import { Context } from '../js/store/appContext.js';
 import { useNavigate } from 'react-router-dom';
 import socket from '../socket';
 
@@ -10,6 +11,8 @@ export default function LobbySection() {
   const [rooms, setRooms] = useState([]);
   const roomsRef = useRef([]);
   const navigate = useNavigate();
+
+  const { store } = useContext(Context)
 
   useEffect(() => {
     const handleRoomsList = ({ rooms }) => {
@@ -87,22 +90,37 @@ export default function LobbySection() {
   };
 
   return (
-    <div className="relative bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"
-        ></div>
+    <div className="relative bg-gray-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-6 right-6 flex items-center space-x-3">
+        <span className="text-green-400 font-bold text-lg">
+          Bienvenido {store.user.username}
+        </span>
+        {/* Recordar sacar la "e" extra cuando ya venga la imagen url posta acá abajo en url_imageeeeee */}
+        <img
+          src={
+            store.user.url_imagee ||
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(store.user.username || 'U')}&size=40&background=888888&color=ffffff`
+          }
+          alt="Avatar"
+          className="w-10 h-10 rounded-full border-2 border-green-400 shadow-[0_0_10px_rgba(74,222,128,0.7)]"
+        />
       </div>
 
+      {/* Contenido principal */}
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-base text-indigo-400 font-semibold tracking-wide uppercase">Lobby</h2>
-          <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Salas de Batalla
-          </h1>
-          <p className="mt-3 max-w-2xl text-xl text-gray-300 mx-auto">
-            Crea tu sala o únete a una batalla existente
-          </p>
+        {/* Header con su propio div padre */}
+        <div className="mb-12">
+          <div className="text-center">
+            <h2 className="text-base text-indigo-400 font-semibold tracking-wide uppercase">
+              Lobby
+            </h2>
+            <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Salas de Batalla
+            </h1>
+            <p className="mt-3 max-w-2xl text-xl text-gray-300 mx-auto">
+              Crea tu sala o únete a una batalla existente
+            </p>
+          </div>
         </div>
 
         <div className="bg-gray-800 rounded-xl p-6 mb-12 shadow-xl border border-gray-700">
@@ -191,10 +209,9 @@ export default function LobbySection() {
                     <div>
                       <h4 className="text-lg font-semibold text-white">{room.name}</h4>
                       <div className="flex items-center mt-1 space-x-4">
-                        <span className={`px-2 py-1 text-xs rounded-full ${
-                          room.difficulty === 'easy' ? 'bg-green-500 text-green-900' :
-                          room.difficulty === 'medium' ? 'bg-yellow-500 text-yellow-900' : 'bg-red-500 text-red-900'
-                        }`}> {translateDifficulty(room.difficulty)} </span>
+                        <span className={`px-2 py-1 text-xs rounded-full ${room.difficulty === 'easy' ? 'bg-green-500 text-green-900' :
+                            room.difficulty === 'medium' ? 'bg-yellow-500 text-yellow-900' : 'bg-red-500 text-red-900'
+                          }`}> {translateDifficulty(room.difficulty)} </span>
                         <span className="text-gray-300 text-sm">
                           {count} {count === 1 ? 'jugador' : 'jugadores'}
                         </span>

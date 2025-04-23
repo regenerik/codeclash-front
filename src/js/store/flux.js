@@ -6,8 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             registerOk: true,
             reportes_disponibles: [],
             reportes_no_disponibles: [],
-            userName: "",
-            user: { username: "", dni: "", admin: "", email: "", url_image: "" },
+            userName: "invitado",
+            user: { username: "invitado", dni: "", admin: "", email: "", url_image: "invitado" },
             trigger: false,
             dataEstadisticas: {}
         },
@@ -248,7 +248,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             login: async (info) => {
                 try {
-                    let response = await fetch("https://e3digital.onrender.com/login", {
+                    let response = await fetch(process.env.REACT_APP_BASE_URL +'/login', {
                         method: 'POST',
                         body: JSON.stringify(info),
                         headers: {
@@ -257,10 +257,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
 
                     const data = await response.json();
-
                     if (!data.access_token) {
                         throw new Error("La pifiaste con las credenciales. ", " Aca la data:", data);
                     }
+
 
 
                     // Guardar token en localStorage
@@ -287,7 +287,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     });
 
-
                 } catch (e) {
                     console.error(e);
                 }
@@ -295,28 +294,30 @@ const getState = ({ getStore, getActions, setStore }) => {
             register: async (info) => {
                 try {
 
-                    let response = await fetch('https://e3digital.onrender.com/create_user', {
+                    let response = await fetch(process.env.REACT_APP_BASE_URL +'/create_user', {
                         method: "POST",
                         body: JSON.stringify(info),
                         headers: {
                             'Content-type': 'application/json'
                         }
                     })
+                    console.log("el response: ",response)
+                    if(!response.ok){
+                        throw new Error("Algo malió sal.")
+                    }
 
                     let data = await response.json();
                     console.log("respuesta de intento de registro: ", data)
+
                     if (!data.message && data.error) {
-                        setStore({ ...getStore(), registerOk: false })
-                        alert(data.error)
                         return false
                     } else {
-                        setStore({ ...getStore(), registerOk: true })
                         return true
                     }
 
-
                 } catch (e) {
                     console.log(`Error al registrar el usuario ${e}`)
+                    return false
                 }
             },
             wrongPass: (booleano) => {

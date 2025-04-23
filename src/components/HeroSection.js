@@ -9,6 +9,10 @@ const HeroSection = () => {
     navigate('/lobbysection')
   }
 
+  const handleGoRegister = () => {
+    navigate('/register')
+  }
+
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-indigo-900 pt-12 px-4 sm:px-6 lg:px-8">
       {/* Efecto de líneas de código flotantes */}
@@ -58,23 +62,9 @@ const HeroSection = () => {
                 Demuestra tus habilidades, compite contra otros desarrolladores y deja que nuestra IA determine quién escribe el mejor código según criterios profesionales.
               </p>
 
-
-              {/* <div className="mt-5 sm:mt-8 sm:flex sm:justify-center sm:items-center lg:justify-start">
-                <div className="rounded-md shadow">
-                  <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105">
-                    Registrarse ahora
-                  </button>
-                </div>
-                <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <button onClick={handleToLobby} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all duration-300">
-                    Test Lobby
-                  </button>
-                </div>
-              </div> */}
-
               <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center sm:justify-center lg:justify-start gap-y-3 sm:gap-y-0 sm:gap-x-3">
                 <div className="rounded-md shadow">
-                  <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105">
+                  <button onClick={handleGoRegister} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105">
                     Registrarse ahora
                   </button>
                 </div>
@@ -84,8 +74,6 @@ const HeroSection = () => {
                   </button>
                 </div>
               </div>
-
-
 
             </div>
           </main>
@@ -110,7 +98,7 @@ const HeroSection = () => {
         </svg>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0% {
             transform: translateY(0) translateX(0);
