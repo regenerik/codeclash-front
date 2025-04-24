@@ -89,20 +89,29 @@ export default function LobbySection() {
     return 'Difícil';
   };
 
+  const handleGoProfile = () => {
+    navigate('/perfilnew')
+  }
+
   return (
     <div className="relative bg-gray-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="absolute top-6 right-6 flex items-center space-x-3">
         <span className="text-green-400 font-bold text-lg">
-          Bienvenido {store.user.username}
+          Bienvenido {store.user.name}
         </span>
         {/* Recordar sacar la "e" extra cuando ya venga la imagen url posta acá abajo en url_imageeeeee */}
         <img
+          onClick={handleGoProfile}
           src={
             store.user.url_imagee ||
             `https://ui-avatars.com/api/?name=${encodeURIComponent(store.user.username || 'U')}&size=40&background=888888&color=ffffff`
           }
           alt="Avatar"
-          className="w-10 h-10 rounded-full border-2 border-green-400 shadow-[0_0_10px_rgba(74,222,128,0.7)]"
+          className="
+    w-10 h-10 rounded-full border-2 border-green-400 
+    shadow-[0_0_10px_rgba(74,222,128,0.7)]
+    cursor-pointer
+  "
         />
       </div>
 
@@ -210,7 +219,7 @@ export default function LobbySection() {
                       <h4 className="text-lg font-semibold text-white">{room.name}</h4>
                       <div className="flex items-center mt-1 space-x-4">
                         <span className={`px-2 py-1 text-xs rounded-full ${room.difficulty === 'easy' ? 'bg-green-500 text-green-900' :
-                            room.difficulty === 'medium' ? 'bg-yellow-500 text-yellow-900' : 'bg-red-500 text-red-900'
+                          room.difficulty === 'medium' ? 'bg-yellow-500 text-yellow-900' : 'bg-red-500 text-red-900'
                           }`}> {translateDifficulty(room.difficulty)} </span>
                         <span className="text-gray-300 text-sm">
                           {count} {count === 1 ? 'jugador' : 'jugadores'}

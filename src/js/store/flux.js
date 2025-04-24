@@ -15,19 +15,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             getAfiliacion: async (payload) => {
                 const token = localStorage.getItem('token');
                 const actions = getActions(); // Para acceder al logout directamente
-            
+
                 if (!token) {
                     console.error("El token es undefined. Asegurate de que esté guardado correctamente.");
                     actions.logout(); // Llamamos al logout si no hay token
                     return;
                 }
-                try{
+                try {
                     const response = await fetch('https://e3digital.onrender.com/consulta-afiliado', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + token
-                            },
+                        },
                         body: JSON.stringify(payload)
                     })
                     const data = await response.json();
@@ -40,9 +40,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         return;
                     }
 
-                    if(!data.msg) throw new Error('algo salio mal en la solicitud')
+                    if (!data.msg) throw new Error('algo salio mal en la solicitud')
                     alert(data.msg)
-                }catch(e){
+                } catch (e) {
                     console.error(e)
                 }
             },
@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 try {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 120000); // 2min
-            
+
                     let response = await fetch("https://e3digital.onrender.com/resultados_electorales", {
                         method: 'POST',
                         headers: {
@@ -60,19 +60,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(payload),
                         signal: controller.signal // Vinculamos el abort signal
                     });
-            
+
                     clearTimeout(timeoutId); // Limpiamos el timeout si llega la respuesta
-            
+
                     let data = await response.json();
                     console.log("Data entrante para resultados electorales: ", data);
-            
+
                     if (!response.ok) {
                         throw new Error("Error HTTP: " + response.status);
                     }
-            
+
                     let store = getStore();
                     setStore({ ...store, dataEstadisticas: data });
-            
+
                 } catch (e) {
                     if (e.name === 'AbortError') {
                         console.error("Error: La solicitud tomó demasiado tiempo y fue abortada.");
@@ -87,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     const token = localStorage.getItem('token');
                     const actions = getActions(); // Para acceder al logout directamente
-                
+
                     if (!token) {
                         console.error("El token es undefined. Asegurate de que esté guardado correctamente.");
                         actions.logout(); // Llamamos al logout si no hay token
@@ -166,31 +166,31 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log("getUsers ejecutándose...");
                 const token = localStorage.getItem('token');
                 const actions = getActions(); // Para acceder al logout directamente
-            
+
                 if (!token) {
                     console.error("El token es undefined. Asegurate de que esté guardado correctamente.");
                     actions.logout(); // Llamamos al logout si no hay token
                     return;
                 }
-            
+
                 try {
                     const response = await fetch("https://e3digital.onrender.com/users", {
                         headers: {
                             "Authorization": `Bearer ${token}`
                         }
                     });
-            
+
                     // Si el token es inválido, se recibe un código 401
                     if (response.status === 401) {
                         console.error("El token expiró o no es válido. Cerrando sesión...");
                         actions.logout(); // Logout automático
                         return;
                     }
-            
+
                     if (!response.ok) {
                         throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
                     }
-            
+
                     const data = await response.json();
                     if (data.lista_usuarios) {
                         setStore({ ...getStore(), users: data.lista_usuarios });
@@ -246,40 +246,89 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log("hola")
                 return
             },
-            login: async (info) => {
+            definePassword: async (oldPassword, newPassword) => {
                 try {
-                    let response = await fetch(process.env.REACT_APP_BASE_URL +'/login', {
-                        method: 'POST',
-                        body: JSON.stringify(info),
+                    const token = localStorage.getItem('token');
+                    const resp = await fetch(process.env.REACT_APP_BASE_URL + '/update-password', {
+                        method: 'PATCH',
                         headers: {
-                            'Content-Type': 'application/json'
-                        }
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            old_password: oldPassword,
+                            new_password: newPassword
+                        })
                     });
 
-                    const data = await response.json();
-                    if (!data.access_token) {
-                        throw new Error("La pifiaste con las credenciales. ", " Aca la data:", data);
+                    if (!resp.ok) {
+                        // Puedes extraer detalle de error del JSON si tu API lo devuelve
+                        const err = await resp.json().catch(() => null);
+                        throw new Error(err?.msg || `Status ${resp.status}`);
                     }
 
+                    const data = await resp.json();
+                    return data;
+                } catch (err) {
+                    console.error('definePassword error:', err);
+                    throw err;
+                }
+            },
+            updateUser: async (updateData) => {
+                try {
+                    const token = localStorage.getItem('token');
+                    const resp = await fetch(process.env.REACT_APP_BASE_URL + '/user_update', { // ACTUALIZAR URL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(updateData)
+                    });
+                    if (!resp.ok) {
+                        throw new Error(`Error al actualizar usuario: ${resp.status}`);
+                    }
+                    const data = await resp.json();
+                    // Asumimos que devuelves el user actualizado
+                    setStore({ ...getStore(), user: data.user });
+                    return data;
+                } catch (err) {
+                    console.error(err);
+                    throw err;
+                }
+            },
+            login: async (info) => {
+                try {
+                    const resp = await fetch(
+                        process.env.REACT_APP_BASE_URL + '/login',
+                        {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(info)
+                        }
+                    );
+                    const data = await resp.json();
 
+                    if (!resp.ok || !data.access_token) {
+                        // devolvemos false para que el componente sepa fallo
+                        console.error('login error:', data);
+                        return false;
+                    }
 
-                    // Guardar token en localStorage
+                    // éxito: guardás token y user
                     localStorage.setItem('token', data.access_token);
-
-                    // Guardar otros datos
                     localStorage.setItem('name', data.name);
                     localStorage.setItem('admin', JSON.stringify(data.admin));
                     localStorage.setItem('dni', data.dni);
                     localStorage.setItem('url_image', data.url_image);
                     localStorage.setItem('email', data.email);
 
-                    // Guardar en el estado global
                     setStore({
                         ...getStore(),
-                        userName: data.name,
+                        name: data.name,
                         token: data.access_token,
                         user: {
-                            username: data.name,
+                            name: data.name,
                             dni: data.dni,
                             admin: data.admin,
                             email: data.email,
@@ -287,22 +336,24 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     });
 
-                } catch (e) {
-                    console.error(e);
+                    return true;
+                } catch (err) {
+                    console.error('login exception:', err);
+                    return false;
                 }
             },
             register: async (info) => {
                 try {
 
-                    let response = await fetch(process.env.REACT_APP_BASE_URL +'/create_user', {
+                    let response = await fetch(process.env.REACT_APP_BASE_URL + '/create_user', {
                         method: "POST",
                         body: JSON.stringify(info),
                         headers: {
                             'Content-type': 'application/json'
                         }
                     })
-                    console.log("el response: ",response)
-                    if(!response.ok){
+                    console.log("el response: ", response)
+                    if (!response.ok) {
                         throw new Error("Algo malió sal.")
                     }
 
@@ -326,12 +377,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             logout: () => {
                 const store = getStore();
-            
+
                 setStore({ ...store, token: "", userName: "" });
                 localStorage.removeItem('token');
                 localStorage.removeItem('name');
                 localStorage.removeItem('admin');
-            
+
                 console.log("LogOut manual o Token vencido...");
             },
             getReportList: async () => {

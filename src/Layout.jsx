@@ -16,6 +16,7 @@ import RoomViewBest from './components/RoomViewBest.jsx';
 import Main from './views/Main.js';
 import RegisterNew from './components/RegisterNew.jsx';
 import LoginNew from './components/LoginNew.jsx';
+import PerfilNew from './views/PerfilNew.jsx';
 
 
 const Layout = () => {
@@ -47,6 +48,7 @@ const Layout = () => {
                 <Route exact path="/roomviewbest/:id" element={<RoomViewBest/>} />
                 <Route exact path="/register" element={<RegisterNew/>} />
                 <Route path="/room/:id" element={<RoomView />} />
+                <Route path="/perfilnew" element={<PerfilNew />} />
                 <Route exact path="/" element={<Main/>}/>
                 <Route exact path="/contact" element={<Contact/>}/>
                 <Route exact path="/main" element={<Main/>}/>
