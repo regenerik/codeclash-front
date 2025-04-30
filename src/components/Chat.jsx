@@ -39,11 +39,10 @@ export default function Chat({ roomId, username }) {
       borderRadius: 8,
       width: '100%',
       maxWidth: 500,
-      height: 350,
+      height: 128,
       display: 'flex',
       flexDirection: 'column',
-      background: '#374151',
-      marginTop: 20
+      background: '#374151'
     }}>
       <div
         ref={boxRef}

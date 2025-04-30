@@ -4,15 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import socket from '../socket';
 
 export default function LobbySection() {
+
+  const { store, actions } = useContext(Context)
+  const [isTokenValid, setIsTokenValid] = useState(null)
   const [roomName, setRoomName] = useState('');
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(store.user.name);
   const [password, setPassword] = useState('');
   const [difficulty, setDifficulty] = useState('easy');
   const [rooms, setRooms] = useState([]);
+  const [clientCount, setClientCount] = useState(0)
   const roomsRef = useRef([]);
   const navigate = useNavigate();
 
-  const { store } = useContext(Context)
 
   useEffect(() => {
     const handleRoomsList = ({ rooms }) => {
@@ -33,14 +36,25 @@ export default function LobbySection() {
     socket.on('rooms_list', handleRoomsList);
     socket.on('room_created', handleRoomCreated);
     socket.on('error', handleError);
+    socket.on('lobby_count', data => {
+      setClientCount(data.count);
+    })
     socket.emit('list_rooms');
 
     return () => {
       socket.off('rooms_list', handleRoomsList);
       socket.off('room_created', handleRoomCreated);
       socket.off('error', handleError);
+      socket.off('lobby_count');
     };
   }, [navigate]);
+
+  useEffect(() => {
+    (async () => {
+      const ok = await actions.validateToken();
+      setIsTokenValid(ok);
+    })();
+  }, [])
 
   const handleCreateRoom = (e) => {
     e.preventDefault();
@@ -60,6 +74,7 @@ export default function LobbySection() {
   const joinRoom = (room) => {
     if ((room.participants || []).length >= 2) return;
     const user = username || prompt('Tu nombre de usuario:');
+    if (isTokenValid === false) return navigate('/login-new');
     if (!user) return;
     const pass = room.hasPassword ? prompt('Contraseña:') : null;
     if (room.hasPassword && pass === null) return;
@@ -83,6 +98,12 @@ export default function LobbySection() {
     );
   };
 
+  const handleLogOut = () => {
+    socket.disconnect()
+    actions.logout()
+    navigate('/')
+  }
+
   const translateDifficulty = (d) => {
     if (d === 'easy') return 'Fácil';
     if (d === 'medium') return 'Medio';
@@ -95,11 +116,36 @@ export default function LobbySection() {
 
   return (
     <div className="relative bg-gray-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-16 left-6 text-green-400 font-medium">
+        Online: {clientCount}
+      </div>
+      {/* Logout */}
+      <div className="absolute top-6 left-6">
+        <button
+          onClick={handleLogOut}
+          className="focus:outline-none"
+          title="localStorage.deleteItem('token')"
+        >
+          <i
+            className="
+        fa fa-power-off           /* o fa-sign-out-alt si lo tenés cargado */
+        text-white text-2xl
+        inline-block              /* para que el drop-shadow solo cubra el icono */
+        filter
+        drop-shadow-[0_0_8px_rgba(74,222,128,0.7)]
+        hover:drop-shadow-[0_0_16px_rgba(74,222,128,0.9)]
+        hover:text-green-400
+        transition-all duration-200
+      "
+          ></i>
+        </button>
+      </div>
+
+      {/* Perfil */}
       <div className="absolute top-6 right-6 flex items-center space-x-3">
         <span className="text-green-400 font-bold text-lg">
           Bienvenido {store.user.name}
         </span>
-        {/* Recordar sacar la "e" extra cuando ya venga la imagen url posta acá abajo en url_imageeeeee */}
         <img
           onClick={handleGoProfile}
           src={
@@ -108,10 +154,11 @@ export default function LobbySection() {
           }
           alt="Avatar"
           className="
-    w-10 h-10 rounded-full border-2 border-green-400 
-    shadow-[0_0_10px_rgba(74,222,128,0.7)]
-    cursor-pointer
-  "
+            w-10 h-10 rounded-full
+            border-2 border-green-400
+            shadow-[0_0_10px_rgba(74,222,128,0.7)]
+            cursor-pointer
+          "
         />
       </div>
 

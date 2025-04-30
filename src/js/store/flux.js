@@ -7,11 +7,25 @@ const getState = ({ getStore, getActions, setStore }) => {
             reportes_disponibles: [],
             reportes_no_disponibles: [],
             userName: "invitado",
-            user: { username: "invitado", dni: "", admin: "", email: "", url_image: "invitado" },
+            user: { name: "invitado", dni: "", admin: "", email: "", url_image: "invitado" },
             trigger: false,
             dataEstadisticas: {}
         },
         actions: {
+            validateToken: async () => {
+                try {
+                  const res = await fetch( process.env.REACT_APP_BASE_URL + '/validate-token', {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                  });
+                  if (res.ok) {
+                    const { valid } = await res.json(); // { valid: true } o false
+                    return valid;
+                  }
+                  return false;
+                } catch {
+                  return false;
+                }
+              },
             getAfiliacion: async (payload) => {
                 const token = localStorage.getItem('token');
                 const actions = getActions(); // Para acceder al logout directamente

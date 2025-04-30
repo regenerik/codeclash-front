@@ -22,11 +22,8 @@ export default function RoomViewBest() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const updateHandler = ({ participants }) => {
-      setParticipants(participants);
-    };
+    const updateHandler = ({ participants }) => setParticipants(participants);
     const closedHandler = (data) => {
-      console.log('recibí room_deleted', data);
       const closedId = data.room_id ?? data.roomId;
       if (String(closedId) === id) {
         alert('La sala fue cerrada. Volviendo al Lobby.');
@@ -36,7 +33,6 @@ export default function RoomViewBest() {
 
     socket.on('update_participants', updateHandler);
     socket.on('room_deleted', closedHandler);
-
     return () => {
       socket.off('update_participants', updateHandler);
       socket.off('room_deleted', closedHandler);
@@ -44,13 +40,9 @@ export default function RoomViewBest() {
   }, [id, navigate]);
 
   useEffect(() => {
-    const onUnload = () => {
-      socket.emit('leave_room', { room_id: id });
-    };
+    const onUnload = () => socket.emit('leave_room', { room_id: id });
     window.addEventListener('beforeunload', onUnload);
-    return () => {
-      window.removeEventListener('beforeunload', onUnload);
-    };
+    return () => window.removeEventListener('beforeunload', onUnload);
   }, [id]);
 
   const handleExit = () => {
@@ -73,7 +65,7 @@ export default function RoomViewBest() {
 
   return (
     <div className="relative min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Efecto de código flotante */}
+      {/* Código de fondo flotante */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         {[...Array(30)].map((_, i) => (
           <div
@@ -86,20 +78,25 @@ export default function RoomViewBest() {
               opacity: 0.3 + Math.random() * 0.7,
             }}
           >
-            {['function','const','return','if','else','console.log','import','export','useState','useEffect'][Math.floor(Math.random()*10)]}
+            {['function','const','return','if','else','console.log','import','export','useState','useEffect'][
+              Math.floor(Math.random() * 10)
+            ]}
           </div>
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header de la sala */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+      <div className="max-w-7xl mx-auto relative z-10 space-y-8">
+        {/* Header sala */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="text-3xl font-bold text-white">{roomName}</h1>
             <div className="flex items-center mt-2 space-x-4">
               <span className={`px-3 py-1 text-sm rounded-full ${
-                difficulty === 'easy' ? 'bg-green-500 text-green-900' :
-                difficulty === 'medium' ? 'bg-yellow-500 text-yellow-900' : 'bg-red-500 text-red-900'
+                difficulty === 'easy'
+                  ? 'bg-green-500 text-green-900'
+                  : difficulty === 'medium'
+                    ? 'bg-yellow-500 text-yellow-900'
+                    : 'bg-red-500 text-red-900'
               }`}>
                 {translateDifficulty(difficulty)}
               </span>
@@ -111,19 +108,21 @@ export default function RoomViewBest() {
           <button
             onClick={handleExit}
             className={`mt-4 md:mt-0 px-6 py-2 rounded-lg font-medium ${
-              isHost ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-gray-700 hover:bg-gray-600 text-white'
+              isHost
+                ? 'bg-red-600 hover:bg-red-700 text-white'
+                : 'bg-gray-700 hover:bg-gray-600 text-white'
             } transition-colors duration-200`}
           >
             {isHost ? 'Cerrar sala' : 'Volver al lobby'}
           </button>
         </div>
 
-        {/* Contenido principal */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Lista de jugadores */}
-          <div className="lg:col-span-1 bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h2 className="text-xl font-semibold text-white mb-4">Jugadores</h2>
-            <div className="space-y-3">
+        {/* Box Jugadores + Chat lado a lado */}
+        <div className="bg-gray-800 rounded-xl p-3 border border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Jugadores list (altura fija para 2 jugadores) */}
+          <div>
+            <h2 className="text-xl font-semibold text-white mb-2">Jugadores</h2>
+            <div className="space-y-2 overflow-auto" style={{ maxHeight: '8rem' }}>
               {participants.length > 0 ? (
                 participants.map((p, i) => (
                   <div key={i} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
@@ -135,27 +134,31 @@ export default function RoomViewBest() {
               )}
             </div>
           </div>
-
-          {/* Área principal */}
-          <div className="lg:col-span-2 space-y-6 text-white">
-            {!gameStarted ? (
-              <>  
-                <MatchControl
-                  roomId={id}
-                  username={username}
-                  isHost={isHost}
-                  participants={participants}
-                  onGameStart={(mins) => {
-                    setBattleMinutes(mins);
-                    setGameStarted(true);
-                  }}
-                />
-                <Chat roomId={id} username={username} />
-              </>
-            ) : (
-              <ExerciseBattle roomId={id} username={username} battleMinutes={battleMinutes} />
-            )}
+          {/* Chat reducido (dentro de misma caja) */}
+          <div>
+          <h2 className="text-xl font-semibold text-white mb-2">Chat</h2>
+            <div style={{ maxHeight: '8rem', overflow: 'hidden' }}>
+              <Chat roomId={id} username={username} />
+            </div>
           </div>
+        </div>
+
+        {/* Área principal Batalla / Control debajo */}
+        <div className="space-y-6 text-white">
+          {!gameStarted ? (
+            <MatchControl
+              roomId={id}
+              username={username}
+              isHost={isHost}
+              participants={participants}
+              onGameStart={(mins) => {
+                setBattleMinutes(mins);
+                setGameStarted(true);
+              }}
+            />
+          ) : (
+            <ExerciseBattle roomId={id} username={username} battleMinutes={battleMinutes} />
+          )}
         </div>
       </div>
     </div>

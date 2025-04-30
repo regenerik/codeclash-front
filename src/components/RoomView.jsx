@@ -98,7 +98,7 @@ export default function RoomView() {
         />
         : <ExerciseBattle roomId={id} username={username} battleMinutes={battleMinutes} />
       }
-      {!gameStarted && <Chat roomId={id} username={username} />}
+      <Chat roomId={id} username={username} />
     </div>
   )
 }

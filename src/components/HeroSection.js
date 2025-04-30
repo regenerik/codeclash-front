@@ -5,8 +5,8 @@ const HeroSection = () => {
 
   let navigate = useNavigate()
 
-  const handleToLobby = () => {
-    navigate('/lobbysection')
+  const handleToLogin = () => {
+    navigate('/login-new')
   }
 
   const handleGoRegister = () => {
@@ -69,8 +69,8 @@ const HeroSection = () => {
                   </button>
                 </div>
                 <div>
-                  <button  onClick={handleToLobby} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all duration-300">
-                    Test Lobby
+                  <button  onClick={handleToLogin} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all duration-300">
+                    Login
                   </button>
                 </div>
               </div>

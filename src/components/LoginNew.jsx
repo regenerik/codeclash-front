@@ -30,6 +30,10 @@ const LoginNew = () => {
     }
   };
 
+  const handlerGoToCreate = () => {
+    navigate('/register')
+  }
+
   return (
     <div className="relative min-h-screen bg-gray-900 overflow-hidden">
       {/* ... matrix backdrops iguales ... */}
@@ -67,6 +71,14 @@ const LoginNew = () => {
             INGRESAR
           </button>
         </form>
+        <div className="mt-6 text-center">
+                    <button
+                        onClick={handlerGoToCreate}
+                        className="text-green-400 hover:text-green-300 text-sm font-mono underline"
+                    >
+                        ¿No tenés cuenta? Registrate acá
+                    </button>
+                </div>
         {/* ... botones de registro y olvidar contraseña ... */}
       </div>
     </div>

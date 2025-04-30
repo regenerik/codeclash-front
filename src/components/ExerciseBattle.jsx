@@ -1,3 +1,4 @@
+// src/components/ExerciseBattle.jsx
 import React, { useState, useEffect, useRef } from 'react'
 import socket from '../socket'
 
@@ -29,7 +30,9 @@ export default function ExerciseBattle({ roomId, username, battleMinutes }) {
       setBattleSeconds(battleMinutes * 60)
     })
     socket.on('both_finished', () => {
+      // 1) cortamos el timer
       clearTimeout(battleTimerRef.current)
+      // 2) ocultamos el cronómetro
       setBattleSeconds(null)
     })
     socket.on('game_result', ({ winner, justification }) => {
@@ -44,14 +47,14 @@ export default function ExerciseBattle({ roomId, username, battleMinutes }) {
     }
   }, [username])
 
-  // Sincronizar prop battleMinutes al iniciar o cambiar
+  // Si cambian los minutos iniciales, reseteamos segundos
   useEffect(() => {
     if (battleMinutes != null) {
       setBattleSeconds(battleMinutes * 60)
     }
   }, [battleMinutes])
 
-  // Auto-submit al agotarse el tiempo
+  // Cronómetro y auto-submit al llegar a cero
   useEffect(() => {
     if (battleSeconds == null) return
     if (battleSeconds <= 0) {
@@ -83,7 +86,15 @@ export default function ExerciseBattle({ roomId, username, battleMinutes }) {
   // Si ya tenemos resultado, mostramos cartel y salimos
   if (gameResult) {
     return (
-      <div style={{ padding: 20, border: '2px solid #28a745', borderRadius: 8, background: '#2d3748', color: '#fff' }}>
+      <div
+        style={{
+          padding: 20,
+          border: '2px solid #28a745',
+          borderRadius: 8,
+          background: '#2d3748',
+          color: '#fff'
+        }}
+      >
         <h2>🏆 Ganador: {gameResult.winner}</h2>
         <p>{gameResult.justification}</p>
       </div>
@@ -95,14 +106,15 @@ export default function ExerciseBattle({ roomId, username, battleMinutes }) {
       {/* Mostrar cronómetro si corresponde */}
       {battleSeconds != null && (
         <div style={{ marginBottom: 10 }}>
-          <strong style={{ color: '#fff' }}>Tiempo restante:</strong> {formatTime(battleSeconds)}
+          <strong style={{ color: '#fff' }}>Tiempo restante:</strong>{' '}
+          {formatTime(battleSeconds)}
         </div>
       )}
 
       <h2 style={{ color: '#fff' }}>{exercise.title}</h2>
       <p style={{ color: '#fff' }}>{exercise.description}</p>
 
-      {/* Tildazo si el rival terminó */}
+      {/* Aviso si el rival terminó */}
       {opponentFinished && !finished && (
         <div style={{ color: 'green', marginBottom: 8 }}>
           ✔️ El rival terminó
@@ -147,7 +159,15 @@ export default function ExerciseBattle({ roomId, username, battleMinutes }) {
       <button
         onClick={onFinish}
         disabled={finished}
-        style={{ marginTop: 10, background: '#374151', color: '#fff', padding: '8px 12px', border: 'none', borderRadius: 4, cursor: 'pointer' }}
+        style={{
+          marginTop: 10,
+          background: '#374151',
+          color: '#fff',
+          padding: '8px 12px',
+          border: 'none',
+          borderRadius: 4,
+          cursor: 'pointer'
+        }}
       >
         {finished ? 'Esperando oponente...' : 'Terminé'}
       </button>
